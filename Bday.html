@@ -2433,12 +2433,12 @@
 /* Panther: balloons stay at top like every other section; panther visual pushed down below them */
 #panther-section {
     justify-content: center;
-    padding-top: 150px;
+    padding-top: 40px;
     padding-bottom: 10vh;
 }
 #panther-section .corner-balloons .cb { top: 18px; }
 @media (max-width: 700px) {
-    #panther-section { padding-top: 120px; padding-bottom: 8vh; }
+    #panther-section { padding-top: 32px; padding-bottom: 8vh; }
     #panther-section .corner-balloons .cb { top: 12px; }
 }
 
@@ -2452,7 +2452,7 @@
     0%   { transform: translateY(-190px) rotate(-2deg); }
     100% { transform: translateY(-193px) rotate(-1.6deg); }
 }
-#letter-section { padding: 14vh 0 12vh; }
+#letter-section { padding: 34vh 0 4vh; }
 .letter-content .body-text { font-size: 1.06rem; line-height: 1.78; }
 .letter-content .body-text .type-line { margin-bottom: 0.6rem; }
 .letter-paper { padding: 2.4rem 2.4rem 2.2rem; }
@@ -2467,7 +2467,7 @@
         0%   { transform: translateY(-190px) rotate(-2deg); }
         100% { transform: translateY(-192px) rotate(-1.6deg); }
     }
-    #letter-section { padding: 10vh 0 10vh; }
+    #letter-section { padding: 26vh 0 3vh; }
 }
 
 /* ─── Soften the "Begin The Celebration" transition ─── */
@@ -2800,12 +2800,8 @@
             </h1>
             <div class="hero-divider"></div>
             <p class="hero-tagline">
-                We've crafted something <span class="highlight">magical</span> just for you — a world of letters, compasses, and surprises waiting to unfold. 🌟<br><br>
                 Sit back, scroll slowly, and let the <span class="highlight">celebration begin</span>. 🥂
             </p>
-            <div class="hero-emoji-row">
-                <span>🎈</span><span>🎁</span><span>🪄</span><span>💖</span><span>🎊</span>
-            </div>
             <p class="hero-scroll-cta">↡ Scroll gently to explore ↡</p>
         </div>
 
@@ -3367,6 +3363,7 @@
                 void endCurtains.offsetWidth;
                 endCurtains.classList.remove('opening');
                 endCurtains.classList.add('reveal-end');
+                // 🎵 Birthday song keeps playing after curtains close — do not stop it.
             };
 
             // ── CUSTOM CURSOR ──
@@ -4553,6 +4550,8 @@
                                 }, i*320);
                             }
                             releaseBalloons();
+                            // 🎵 Start birthday song the moment the last candle goes out
+                            if (window.playBirthdaySong) window.playBirthdaySong();
                             // After celebration → end curtains close
                             setTimeout(()=>{ if (window.closeEndCurtains) window.closeEndCurtains(); }, 5200);
                         }
@@ -4630,5 +4629,55 @@
                 'font-style:italic;color:#b8b5ae;');
         })();
     </script>
+
+    <!-- ═══ BIRTHDAY SONG (plays when candles are blown, stops when curtains fully close) ═══ -->
+    <audio id="bday-audio" loop preload="auto" playsinline crossorigin="anonymous">
+        <source id="bday-audio-src" src="" type="audio/mpeg">
+    </audio>
+    <script>
+        (function birthdayAudio(){
+            const AUDIO_SRC = 'https://project--10a22a2c-7785-4789-9807-a41a933e8e3d.lovable.app/__l5e/assets-v1/8ae92c6d-968a-408d-9717-35e635c70691/happy-birthday.mp3';
+            const audio = document.getElementById('bday-audio');
+            const srcEl = document.getElementById('bday-audio-src');
+            if (!audio || !srcEl) return;
+            const TARGET_VOL = 0.55;
+            const FADE_MS = 1500;
+            let fadeRAF = null;
+
+            function setSrcIfNeeded(){
+                if (AUDIO_SRC && srcEl.getAttribute('src') !== AUDIO_SRC){
+                    srcEl.src = AUDIO_SRC;
+                    audio.load();
+                }
+            }
+
+            function fadeTo(target, duration, onDone){
+                if (fadeRAF) cancelAnimationFrame(fadeRAF);
+                const start = performance.now();
+                const from = audio.volume;
+                function step(now){
+                    const t = Math.min(1, (now - start) / duration);
+                    audio.volume = Math.max(0, Math.min(1, from + (target - from) * t));
+                    if (t < 1){ fadeRAF = requestAnimationFrame(step); }
+                    else { fadeRAF = null; if (onDone) onDone(); }
+                }
+                fadeRAF = requestAnimationFrame(step);
+            }
+
+            window.playBirthdaySong = function(){
+                setSrcIfNeeded();
+                if (!AUDIO_SRC) { console.warn('[bday-audio] AUDIO_SRC is empty — set it to your mp3 URL.'); return; }
+                try { audio.volume = TARGET_VOL; audio.currentTime = 0; } catch(e){}
+                const p = audio.play();
+                if (p && p.catch) p.catch(err => console.warn('[bday-audio] play blocked:', err));
+            };
+
+            window.stopBirthdaySong = function(){
+                if (audio.paused) return;
+                fadeTo(0, FADE_MS, () => { try { audio.pause(); audio.currentTime = 0; } catch(e){} });
+            };
+        })();
+    </script>
+
 </body>
 </html>
