@@ -33,7 +33,6 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-snap-type: y proximity;
             overflow-x: hidden;
         }
 
@@ -123,9 +122,27 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            scroll-snap-align: start;
             overflow: hidden;
             padding: 2rem;
+        }
+        /* Soft color blend between adjacent concept regions */
+        .section:not(#welcome-section):not(#arrival-section)::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 140px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0));
+            pointer-events: none;
+            z-index: 6;
+        }
+        .section:not(#welcome-section):not(#arrival-section):not(#finale-section)::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 140px;
+            background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+            pointer-events: none;
+            z-index: 6;
         }
 
         /* ─── SECTION 0: FLOWER BLOOM WELCOME ─── */
@@ -632,15 +649,15 @@
         }
         .envelope.opened .paper-shadow-wrapper {
             opacity: 1;
-            transform: translateY(-172px) rotate(-2deg);
+            transform: translateY(-110px) rotate(-2deg);
             animation: paperSettleFloat 8s ease-in-out infinite alternate 2.8s;
         }
         .envelope.opened .paper-cast-shadow {
             opacity: 1;
         }
         @keyframes paperSettleFloat {
-            0% { transform: translateY(-172px) rotate(-2deg); }
-            100% { transform: translateY(-175px) rotate(-1.6deg); }
+            0% { transform: translateY(-110px) rotate(-2deg); }
+            100% { transform: translateY(-113px) rotate(-1.6deg); }
         }
 
         .letter-paper {
@@ -1911,20 +1928,69 @@
             z-index: 99995;
             pointer-events: none;
             opacity: 0;
-            background: radial-gradient(circle, #0c0c1c 0%, #04040a 100%);
+            background:
+                radial-gradient(circle at var(--clip-cx, 50%) var(--clip-cy, 50%), rgba(255,230,170,0.35) 0%, rgba(20,14,30,0.85) 35%, #04040a 100%);
             clip-path: circle(0% at var(--clip-cx, 50%) var(--clip-cy, 50%));
-            transition: clip-path 0.9s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.5s ease;
+            transition: clip-path 1.4s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.6s ease;
         }
         .transition-overlay.active {
             opacity: 1;
-            clip-path: circle(150% at var(--clip-cx, 50%) var(--clip-cy, 50%));
+            clip-path: circle(160% at var(--clip-cx, 50%) var(--clip-cy, 50%));
             pointer-events: auto;
+        }
+        /* Cinematic flash burst on click */
+        .transition-flash {
+            position: fixed;
+            inset: 0;
+            z-index: 99996;
+            pointer-events: none;
+            opacity: 0;
+            background: radial-gradient(circle at var(--clip-cx, 50%) var(--clip-cy, 50%),
+                rgba(255, 240, 200, 0.95) 0%,
+                rgba(255, 210, 140, 0.5) 12%,
+                rgba(201, 169, 110, 0.15) 28%,
+                transparent 55%);
+            mix-blend-mode: screen;
+        }
+        .transition-flash.fire {
+            animation: flashBurst 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes flashBurst {
+            0%   { opacity: 0; transform: scale(0.4); }
+            18%  { opacity: 1; transform: scale(1); }
+            60%  { opacity: 0.55; transform: scale(1.35); }
+            100% { opacity: 0; transform: scale(1.8); }
+        }
+        /* Expanding golden shockwave rings */
+        .transition-ring {
+            position: fixed;
+            left: var(--clip-cx, 50%);
+            top: var(--clip-cy, 50%);
+            width: 40px;
+            height: 40px;
+            margin-left: -20px;
+            margin-top: -20px;
+            border-radius: 50%;
+            border: 2px solid rgba(201, 169, 110, 0.65);
+            box-shadow: 0 0 40px 6px rgba(201, 169, 110, 0.35), inset 0 0 30px rgba(255, 220, 160, 0.25);
+            z-index: 99997;
+            pointer-events: none;
+            opacity: 0;
+        }
+        .transition-ring.fire { animation: ringOut 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        .transition-ring.delay-1 { animation-delay: 0.15s; }
+        .transition-ring.delay-2 { animation-delay: 0.32s; }
+        @keyframes ringOut {
+            0%   { opacity: 0.9; transform: scale(0.2); border-width: 3px; }
+            60%  { opacity: 0.5; }
+            100% { opacity: 0; transform: scale(45); border-width: 0.5px; }
         }
         #transition-canvas {
             width: 100%;
             height: 100%;
             display: block;
         }
+        
         
         /* GPU-accelerated welcome section exit transitions */
         .welcome-hero,
@@ -2727,66 +2793,8 @@
     </section>
 
     <!-- ═══════════ SECTION 2: JACK SPARROW'S COMPASS ═══════════ -->
-    <section class="section" id="compass-section">
-        <div class="compass-map"></div>
-        <div class="compass-stars"></div>
-        <div class="compass-ocean">
-            <div class="compass-waves"></div>
-        </div>
-        <svg class="compass-ship" viewBox="0 0 90 46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <g fill="#01080c" stroke="#0a1a20" stroke-width="0.5">
-                <path d="M8 34 Q45 40 82 34 L74 40 Q45 44 16 40 Z"/>
-                <path d="M30 34 L30 10 L46 30 Z"/>
-                <path d="M50 34 L50 6  L66 30 Z"/>
-                <line x1="30" y1="10" x2="30" y2="34" stroke="#0a1a20" stroke-width="0.6"/>
-                <line x1="50" y1="6"  x2="50" y2="34" stroke="#0a1a20" stroke-width="0.6"/>
-            </g>
-        </svg>
-        <div class="compass-fog"></div>
-        <div class="compass-paper"></div>
-        <div class="compass-paper"></div>
-        <div class="compass-paper"></div>
-        <div class="compass-spark"></div>
-        <div class="compass-spark"></div>
-        <div class="compass-spark"></div>
-        <div class="compass-spark"></div>
+    <!-- Compass section removed per request -->
 
-        <div class="compass-container">
-            <div class="compass-outer">
-                <div class="compass-inner">
-                    <div class="compass-needle"></div>
-                    <div class="compass-dot"></div>
-                </div>
-            </div>
-        </div>
-        <p class="compass-quote">
-            "Not all treasure is silver and gold, mate.<br>Some treasures are <em>people</em> — like you."
-            <span class="savvy">— Savvy?</span>
-        </p>
-
-        <svg class="compass-rope left" viewBox="0 0 210 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-                <pattern id="ropeTwistL" x="0" y="0" width="10" height="12" patternUnits="userSpaceOnUse">
-                    <path d="M0 6 Q2.5 0 5 6 T10 6" stroke="#c9a96e" stroke-width="1.4" fill="none"/>
-                    <path d="M0 6 Q2.5 12 5 6 T10 6" stroke="#8b6a3a" stroke-width="1" fill="none"/>
-                </pattern>
-            </defs>
-            <path d="M4 30 Q60 6 130 18 T206 14" stroke="url(#ropeTwistL)" stroke-width="8" fill="none" stroke-linecap="round"/>
-            <circle cx="4" cy="30" r="4" fill="#8b6a3a"/>
-            <circle cx="206" cy="14" r="3" fill="#c9a96e"/>
-        </svg>
-        <svg class="compass-rope right" viewBox="0 0 210 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-                <pattern id="ropeTwistR" x="0" y="0" width="10" height="12" patternUnits="userSpaceOnUse">
-                    <path d="M0 6 Q2.5 0 5 6 T10 6" stroke="#c9a96e" stroke-width="1.4" fill="none"/>
-                    <path d="M0 6 Q2.5 12 5 6 T10 6" stroke="#8b6a3a" stroke-width="1" fill="none"/>
-                </pattern>
-            </defs>
-            <path d="M4 30 Q60 6 130 18 T206 14" stroke="url(#ropeTwistR)" stroke-width="8" fill="none" stroke-linecap="round"/>
-            <circle cx="4" cy="30" r="4" fill="#8b6a3a"/>
-            <circle cx="206" cy="14" r="3" fill="#c9a96e"/>
-        </svg>
-    </section>
 
     <!-- ═══════════ SECTION 3: BLACK PANTHER (Wakandan Technology) ═══════════ -->
     <section class="section" id="panther-section">
@@ -2964,28 +2972,8 @@
         </svg>
     </section>
 
-    <!-- ═══════════ SECTION 5: ROBOTICS ENGINEER ═══════════ -->
-    <section class="section" id="robotics-section">
-        <div class="circuit-bg"></div>
-        <div class="gear-icon">
-            <svg viewBox="0 0 140 140">
-                <circle cx="70" cy="70" r="52" stroke="#b8c8d8" stroke-width="2.5" fill="none" opacity="0.6"/>
-                <circle cx="70" cy="70" r="30" stroke="#b8c8d8" stroke-width="2" fill="none" opacity="0.5"/>
-                <circle cx="70" cy="70" r="8" stroke="#b8c8d8" stroke-width="2.5" fill="none" opacity="0.8"/>
-                <!-- Gear teeth -->
-                <rect x="66" y="8" width="8" height="18" rx="3" fill="#b8c8d8" opacity="0.5"/>
-                <rect x="66" y="114" width="8" height="18" rx="3" fill="#b8c8d8" opacity="0.5"/>
-                <rect x="8" y="66" width="18" height="8" rx="3" fill="#b8c8d8" opacity="0.5"/>
-                <rect x="114" y="66" width="18" height="8" rx="3" fill="#b8c8d8" opacity="0.5"/>
-                <rect x="25" y="25" width="14" height="8" rx="3" fill="#b8c8d8" opacity="0.4" transform="rotate(45,32,29)"/>
-                <rect x="101" y="25" width="14" height="8" rx="3" fill="#b8c8d8" opacity="0.4" transform="rotate(-45,108,29)"/>
-                <rect x="25" y="107" width="14" height="8" rx="3" fill="#b8c8d8" opacity="0.4" transform="rotate(-45,32,111)"/>
-                <rect x="101" y="107" width="14" height="8" rx="3" fill="#b8c8d8" opacity="0.4" transform="rotate(45,108,111)"/>
-            </svg>
-        </div>
-        <h2 class="robotics-title">Builder of Wonders</h2>
-        <p class="robotics-sub">Robotics & Automation Engineer<br><span style="font-size:0.85rem;color:#708090;">Crafting the future, one circuit at a time.</span></p>
-    </section>
+    <!-- Robotics / Builder of Wonders section removed per request -->
+
 
     <!-- ═══════════ SECTION 6: GRAND FINALE ═══════════ -->
     <section class="section" id="finale-section">
@@ -3022,6 +3010,11 @@
     <div class="transition-overlay" id="transition-overlay">
         <canvas id="transition-canvas"></canvas>
     </div>
+    <div class="transition-flash" id="transition-flash"></div>
+    <div class="transition-ring" id="transition-ring-1"></div>
+    <div class="transition-ring delay-1" id="transition-ring-2"></div>
+    <div class="transition-ring delay-2" id="transition-ring-3"></div>
+
 
     <!-- Birthday celebration canvases (fireworks + confetti) -->
     <canvas id="fireworks-canvas" style="position:fixed;inset:0;z-index:50;pointer-events:none;"></canvas>
@@ -3741,13 +3734,25 @@
                     this.h = this.tCanvas.height = window.innerHeight;
                     this.running = true;
                     
-                    if (clickX !== undefined && clickY !== undefined) {
-                        this.overlay.style.setProperty('--clip-cx', clickX + 'px');
-                        this.overlay.style.setProperty('--clip-cy', clickY + 'px');
-                    } else {
-                        this.overlay.style.setProperty('--clip-cx', '50%');
-                        this.overlay.style.setProperty('--clip-cy', '50%');
-                    }
+                    const cxVal = (clickX !== undefined) ? clickX + 'px' : '50%';
+                    const cyVal = (clickY !== undefined) ? clickY + 'px' : '50%';
+                    this.overlay.style.setProperty('--clip-cx', cxVal);
+                    this.overlay.style.setProperty('--clip-cy', cyVal);
+                    // Propagate click origin to flash + rings (they're outside overlay)
+                    ['transition-flash','transition-ring-1','transition-ring-2','transition-ring-3'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) {
+                            el.style.setProperty('--clip-cx', cxVal);
+                            el.style.setProperty('--clip-cy', cyVal);
+                        }
+                    });
+                    // Fire flash + shockwave rings
+                    const flash = document.getElementById('transition-flash');
+                    if (flash) { flash.classList.remove('fire'); void flash.offsetWidth; flash.classList.add('fire'); }
+                    ['transition-ring-1','transition-ring-2','transition-ring-3'].forEach(id => {
+                        const r = document.getElementById(id);
+                        if (r) { r.classList.remove('fire'); void r.offsetWidth; r.classList.add('fire'); }
+                    });
                     
                     this.overlay.classList.add('active');
                     this.lockInteraction();
@@ -3756,8 +3761,8 @@
                     this.phase1();
                     this.phase2(clickX, clickY);
                     
-                    setTimeout(() => this.phaseSwap(), 1000);
-                    setTimeout(() => this.phaseEnd(), 1600);
+                    setTimeout(() => this.phaseSwap(), 1500);
+                    setTimeout(() => this.phaseEnd(), 2200);
                 }
                 lockInteraction() {
                     document.body.classList.add('scroll-locked');
@@ -3788,38 +3793,38 @@
                     cx = cx || window.innerWidth / 2;
                     cy = cy || window.innerHeight / 2;
                     
-                    // Capped transition particles to reduce GPU overhead (35 + 15 + 8 = 58 total)
-                    for (let i = 0; i < 35; i++) {
+                    // Cinematic burst — richer, layered particles
+                    for (let i = 0; i < 70; i++) {
                         const angle = Math.random() * Math.PI * 2;
-                        const speed = Math.random() * 8 + 3;
+                        const speed = Math.random() * 11 + 3;
                         this.tParticles.push(new TransitionParticle('golden', cx, cy, {
                             vx: Math.cos(angle) * speed,
                             vy: Math.sin(angle) * speed,
                             size: Math.random() * 4 + 1.5,
-                            decay: Math.random() * 0.015 + 0.008
+                            decay: Math.random() * 0.012 + 0.006
                         }));
                     }
                     
-                    for (let i = 0; i < 15; i++) {
+                    for (let i = 0; i < 32; i++) {
                         const angle = Math.random() * Math.PI * 2;
-                        const speed = Math.random() * 5 + 2;
+                        const speed = Math.random() * 6 + 2;
                         this.tParticles.push(new TransitionParticle('petal', cx, cy, {
                             vx: Math.cos(angle) * speed,
                             vy: Math.sin(angle) * speed - 1,
-                            decay: Math.random() * 0.01 + 0.006,
-                            gravity: 0.03,
+                            decay: Math.random() * 0.008 + 0.004,
+                            gravity: 0.025,
                             color: Math.random() < 0.5 ? 'rgba(180, 255, 240,' : 'rgba(220, 185, 120,'
                         }));
                     }
                     
-                    for (let i = 0; i < 8; i++) {
+                    for (let i = 0; i < 16; i++) {
                         const angle = Math.random() * Math.PI * 2;
-                        const speed = Math.random() * 4 + 1;
+                        const speed = Math.random() * 5 + 1;
                         this.tParticles.push(new TransitionParticle('light', cx, cy, {
                             vx: Math.cos(angle) * speed,
                             vy: Math.sin(angle) * speed,
-                            size: Math.random() * 70 + 40,
-                            decay: Math.random() * 0.02 + 0.015
+                            size: Math.random() * 90 + 50,
+                            decay: Math.random() * 0.018 + 0.012
                         }));
                     }
                 }
