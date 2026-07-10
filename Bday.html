@@ -2546,16 +2546,13 @@
     50%     { transform: scale(1.2); opacity: 1; }
 }
 
-/* Keep decorations under primary content but above section base */
-.section > .letter-wrapper,
-.section > .arrival-content,
-.section > .compass-wrapper,
-.section > .container,
-.section > .celebration-btn-container,
-.section > .flower-stage,
-.section > .welcome-hero,
-.section > .finale-content,
-.section > .cake-celebration,
+/* Keep decorations under primary content but above section base (welcome-section excluded — its button/flower use their own absolute positioning) */
+.section:not(#welcome-section) > .letter-wrapper,
+.section:not(#welcome-section) > .arrival-content,
+.section:not(#welcome-section) > .compass-wrapper,
+.section:not(#welcome-section) > .container,
+.section:not(#welcome-section) > .finale-content,
+.section:not(#welcome-section) > .cake-celebration,
 #panther-section > svg,
 #age-section > * { position: relative; z-index: 8; }
 .corner-balloons { z-index: 9 !important; }
