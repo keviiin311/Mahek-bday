@@ -1472,7 +1472,7 @@
             0%,100% { transform: translate(0,0) scale(1); }
             50%     { transform: translate(6px,-10px) scale(1.08); }
         }
-        /* Paw prints crossing in from top-left corner */
+        /* Paw prints — multi-trail walks across the section */
         .dogs-paws {
             position: absolute;
             inset: 0;
@@ -1481,24 +1481,61 @@
         }
         .dogs-paw {
             position: absolute;
-            width: 26px;
-            height: 26px;
+            width: 22px;
+            height: 22px;
             opacity: 0;
             filter: drop-shadow(0 0 6px rgba(240,200,130,0.35));
-            animation: pawTrail 12s ease-in-out infinite;
+            transform-origin: center;
         }
-        .dogs-paw:nth-child(1) { top: 8%;  left: 4%;  animation-delay: 0s;   }
-        .dogs-paw:nth-child(2) { top: 14%; left: 12%; animation-delay: 0.7s; transform: rotate(12deg); }
-        .dogs-paw:nth-child(3) { top: 22%; left: 20%; animation-delay: 1.4s; transform: rotate(-8deg);}
-        .dogs-paw:nth-child(4) { top: 30%; left: 28%; animation-delay: 2.1s; transform: rotate(10deg);}
-        .dogs-paw:nth-child(5) { top: 40%; left: 36%; animation-delay: 2.8s; transform: rotate(-6deg);}
-        .dogs-paw:nth-child(6) { top: 50%; left: 44%; animation-delay: 3.5s; transform: rotate(8deg); }
+        /* Each paw has: --r (base rotation for trail direction + L/R foot offset),
+           --d (stagger delay). Animation reveals then fades so trail appears sequential. */
+        .dogs-paw {
+            animation: pawTrail 14s ease-in-out infinite;
+            animation-delay: var(--d, 0s);
+            transform: rotate(var(--r, 0deg)) scale(0.6);
+        }
         @keyframes pawTrail {
-            0%   { opacity: 0; transform: scale(0.6) rotate(0deg); }
-            15%  { opacity: 0.55; transform: scale(1) rotate(0deg); }
-            60%  { opacity: 0.55; }
-            100% { opacity: 0; transform: scale(1) rotate(0deg); }
+            0%    { opacity: 0; transform: rotate(var(--r,0deg)) scale(0.5); }
+            8%    { opacity: 0.6; transform: rotate(var(--r,0deg)) scale(1); }
+            55%   { opacity: 0.55; transform: rotate(var(--r,0deg)) scale(1); }
+            75%   { opacity: 0; transform: rotate(var(--r,0deg)) scale(1); }
+            100%  { opacity: 0; transform: rotate(var(--r,0deg)) scale(1); }
         }
+
+        /* Trail 1: top-left → center-right (diagonal down-right) */
+        .dogs-paw.t1-1 { top: 6%;  left: 3%;  --r: 118deg; --d: 0s;    }
+        .dogs-paw.t1-2 { top: 11%; left: 8%;  --r: 138deg; --d: 0.35s; }
+        .dogs-paw.t1-3 { top: 16%; left: 14%; --r: 118deg; --d: 0.7s;  }
+        .dogs-paw.t1-4 { top: 22%; left: 20%; --r: 138deg; --d: 1.05s; }
+        .dogs-paw.t1-5 { top: 28%; left: 27%; --r: 118deg; --d: 1.4s;  }
+        .dogs-paw.t1-6 { top: 34%; left: 34%; --r: 138deg; --d: 1.75s; }
+
+        /* Trail 2: top-right → center-left (diagonal down-left) */
+        .dogs-paw.t2-1 { top: 8%;  right: 5%;  --r: -118deg; --d: 2.2s; }
+        .dogs-paw.t2-2 { top: 14%; right: 11%; --r: -138deg; --d: 2.55s;}
+        .dogs-paw.t2-3 { top: 21%; right: 18%; --r: -118deg; --d: 2.9s; }
+        .dogs-paw.t2-4 { top: 28%; right: 25%; --r: -138deg; --d: 3.25s;}
+        .dogs-paw.t2-5 { top: 36%; right: 33%; --r: -118deg; --d: 3.6s; }
+
+        /* Trail 3: bottom-left → mid (walking up and right) */
+        .dogs-paw.t3-1 { bottom: 12%; left: 6%;  --r: 40deg; --d: 4.4s; }
+        .dogs-paw.t3-2 { bottom: 18%; left: 13%; --r: 60deg; --d: 4.75s;}
+        .dogs-paw.t3-3 { bottom: 25%; left: 21%; --r: 40deg; --d: 5.1s; }
+        .dogs-paw.t3-4 { bottom: 33%; left: 30%; --r: 60deg; --d: 5.45s;}
+        .dogs-paw.t3-5 { bottom: 41%; left: 39%; --r: 40deg; --d: 5.8s; }
+
+        /* Trail 4: bottom-right → mid (walking up and left) */
+        .dogs-paw.t4-1 { bottom: 14%; right: 4%;  --r: -40deg; --d: 6.5s; }
+        .dogs-paw.t4-2 { bottom: 20%; right: 12%; --r: -60deg; --d: 6.85s;}
+        .dogs-paw.t4-3 { bottom: 27%; right: 20%; --r: -40deg; --d: 7.2s; }
+        .dogs-paw.t4-4 { bottom: 34%; right: 29%; --r: -60deg; --d: 7.55s;}
+
+        /* A few smaller, softer prints for depth */
+        .dogs-paw.small { width: 14px; height: 14px; opacity: 0; filter: drop-shadow(0 0 4px rgba(240,200,130,0.25)); }
+        .dogs-paw.s1 { top: 44%; left: 10%; --r: 95deg;  --d: 1.9s; }
+        .dogs-paw.s2 { top: 58%; left: 22%; --r: 75deg;  --d: 3.1s; }
+        .dogs-paw.s3 { top: 48%; right: 15%; --r: -95deg;--d: 4.9s; }
+        .dogs-paw.s4 { top: 62%; right: 28%; --r: -75deg;--d: 6.1s; }
         /* Occasional floating hearts */
         .dogs-heart {
             position: absolute;
@@ -3182,40 +3219,42 @@
         <div class="dogs-bokeh b5"></div>
 
         <div class="dogs-paws">
-            <!-- Paw prints entering from top-left corner -->
-            <svg class="dogs-paw" viewBox="0 0 24 24"><g fill="#e8c88a">
-                <ellipse cx="12" cy="15" rx="5" ry="4"/>
-                <ellipse cx="5" cy="10" rx="2" ry="2.5"/>
-                <ellipse cx="9" cy="6" rx="2" ry="2.5"/>
-                <ellipse cx="15" cy="6" rx="2" ry="2.5"/>
-                <ellipse cx="19" cy="10" rx="2" ry="2.5"/>
-            </g></svg>
-            <svg class="dogs-paw" viewBox="0 0 24 24"><g fill="#e8c88a">
-                <ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/>
-                <ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/>
-                <ellipse cx="19" cy="10" rx="2" ry="2.5"/>
-            </g></svg>
-            <svg class="dogs-paw" viewBox="0 0 24 24"><g fill="#e8c88a">
-                <ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/>
-                <ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/>
-                <ellipse cx="19" cy="10" rx="2" ry="2.5"/>
-            </g></svg>
-            <svg class="dogs-paw" viewBox="0 0 24 24"><g fill="#e8c88a">
-                <ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/>
-                <ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/>
-                <ellipse cx="19" cy="10" rx="2" ry="2.5"/>
-            </g></svg>
-            <svg class="dogs-paw" viewBox="0 0 24 24"><g fill="#e8c88a">
-                <ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/>
-                <ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/>
-                <ellipse cx="19" cy="10" rx="2" ry="2.5"/>
-            </g></svg>
-            <svg class="dogs-paw" viewBox="0 0 24 24"><g fill="#e8c88a">
-                <ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/>
-                <ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/>
-                <ellipse cx="19" cy="10" rx="2" ry="2.5"/>
-            </g></svg>
+            <!-- Four paw trails walking in from each corner toward the center dogs -->
+            <!-- Trail 1: top-left → center -->
+            <svg class="dogs-paw t1-1" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t1-2" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t1-3" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t1-4" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t1-5" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t1-6" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+
+            <!-- Trail 2: top-right → center -->
+            <svg class="dogs-paw t2-1" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t2-2" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t2-3" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t2-4" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t2-5" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+
+            <!-- Trail 3: bottom-left → mid -->
+            <svg class="dogs-paw t3-1" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t3-2" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t3-3" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t3-4" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t3-5" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+
+            <!-- Trail 4: bottom-right → mid -->
+            <svg class="dogs-paw t4-1" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t4-2" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t4-3" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw t4-4" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+
+            <!-- Smaller, softer prints for depth -->
+            <svg class="dogs-paw small s1" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw small s2" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw small s3" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
+            <svg class="dogs-paw small s4" viewBox="0 0 24 24"><g fill="#e8c88a"><ellipse cx="12" cy="15" rx="5" ry="4"/><ellipse cx="5" cy="10" rx="2" ry="2.5"/><ellipse cx="9" cy="6" rx="2" ry="2.5"/><ellipse cx="15" cy="6" rx="2" ry="2.5"/><ellipse cx="19" cy="10" rx="2" ry="2.5"/></g></svg>
         </div>
+
 
         <svg class="dogs-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-9.2C.8 8 3 4 6.8 4c2 0 3.4 1 5.2 3 1.8-2 3.2-3 5.2-3 3.8 0 6 4 4.3 7.8C19 16.5 12 21 12 21z"/></svg>
         <svg class="dogs-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-9.2C.8 8 3 4 6.8 4c2 0 3.4 1 5.2 3 1.8-2 3.2-3 5.2-3 3.8 0 6 4 4.3 7.8C19 16.5 12 21 12 21z"/></svg>
