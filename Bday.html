@@ -2426,6 +2426,321 @@
   background:rgba(255,255,255,0.35);border-radius:50%;transform:rotate(-30deg);}
 .fly-balloon .fb-string{width:1px;height:50px;background:rgba(250,245,255,0.35);margin:0 auto;}
 
+
+/* ═══════════ PATCH 2026-07-10 ═══════════ */
+
+/* ─── Panther: push visual up, drop balloons below ─── */
+/* Panther: balloons stay at top like every other section; panther visual pushed down below them */
+#panther-section {
+    justify-content: center;
+    padding-top: 150px;
+    padding-bottom: 10vh;
+}
+#panther-section .corner-balloons .cb { top: 18px; }
+@media (max-width: 700px) {
+    #panther-section { padding-top: 120px; padding-bottom: 8vh; }
+    #panther-section .corner-balloons .cb { top: 12px; }
+}
+
+/* ─── Letter: bigger paper so text fits, translate higher ─── */
+.paper-shadow-wrapper { height: 520px; }
+.envelope.opened .paper-shadow-wrapper {
+    transform: translateY(-190px) rotate(-2deg);
+    animation: paperSettleFloatLg 8s ease-in-out infinite alternate 2.8s;
+}
+@keyframes paperSettleFloatLg {
+    0%   { transform: translateY(-190px) rotate(-2deg); }
+    100% { transform: translateY(-193px) rotate(-1.6deg); }
+}
+#letter-section { padding: 14vh 0 12vh; }
+.letter-content .body-text { font-size: 1.06rem; line-height: 1.78; }
+.letter-content .body-text .type-line { margin-bottom: 0.6rem; }
+.letter-paper { padding: 2.4rem 2.4rem 2.2rem; }
+
+@media (max-width: 600px) {
+    .paper-shadow-wrapper { height: 420px; }
+    .envelope.opened .paper-shadow-wrapper {
+        transform: translateY(-190px) rotate(-2deg);
+        animation: paperSettleFloatMobileLg 8s ease-in-out infinite alternate 2.8s;
+    }
+    @keyframes paperSettleFloatMobileLg {
+        0%   { transform: translateY(-190px) rotate(-2deg); }
+        100% { transform: translateY(-192px) rotate(-1.6deg); }
+    }
+    #letter-section { padding: 10vh 0 10vh; }
+}
+
+/* ─── Soften the "Begin The Celebration" transition ─── */
+.transition-overlay {
+    background:
+        radial-gradient(circle at var(--clip-cx, 50%) var(--clip-cy, 50%),
+            rgba(232, 200, 168, 0.28) 0%,
+            rgba(28, 20, 40, 0.9) 45%,
+            #08060f 100%) !important;
+    transition: clip-path 1.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.9s ease !important;
+}
+.transition-flash {
+    background: radial-gradient(circle at var(--clip-cx, 50%) var(--clip-cy, 50%),
+        rgba(255, 232, 210, 0.55) 0%,
+        rgba(216, 172, 138, 0.28) 18%,
+        rgba(168, 132, 168, 0.1) 42%,
+        transparent 70%) !important;
+    mix-blend-mode: screen;
+}
+.transition-flash.fire {
+    animation: flashBurstSoft 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+@keyframes flashBurstSoft {
+    0%   { opacity: 0; transform: scale(0.6); }
+    24%  { opacity: 0.7; transform: scale(1.05); }
+    70%  { opacity: 0.28; transform: scale(1.4); }
+    100% { opacity: 0; transform: scale(1.7); }
+}
+.transition-ring {
+    border-color: rgba(216, 180, 168, 0.4) !important;
+    box-shadow: 0 0 30px 2px rgba(216, 180, 168, 0.22), inset 0 0 20px rgba(232, 210, 200, 0.18) !important;
+}
+.transition-ring.fire {
+    animation: ringOutSoft 2s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+@keyframes ringOutSoft {
+    0%   { opacity: 0.55; transform: scale(0.3); border-width: 2px; }
+    60%  { opacity: 0.25; }
+    100% { opacity: 0; transform: scale(38); border-width: 0.5px; }
+}
+
+/* ═══════════ BIRTHDAY DECORATIONS: streamers, confetti, sparkles (all non-welcome sections) ═══════════ */
+.bday-streamers { position:absolute; inset:0; pointer-events:none; z-index: 5; overflow:hidden; }
+.bday-streamers .streamer { position:absolute; top:0; width:110px; height:230px; opacity:0.9;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); animation: streamerSway 7s ease-in-out infinite; }
+.bday-streamers .streamer-l { left:-6px; transform-origin: top left; }
+.bday-streamers .streamer-r { right:-6px; transform-origin: top right; animation-delay:-3.5s; }
+@keyframes streamerSway {
+    0%,100% { transform: rotate(-2deg) translateY(0); }
+    50%     { transform: rotate(3deg)  translateY(4px); }
+}
+
+.bday-confetti { position:absolute; inset:0; pointer-events:none; z-index: 4; overflow:hidden; }
+.bday-confetti .cf { position:absolute; display:block; opacity:0.85;
+    animation: cfDrift 6s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25)); }
+.bday-confetti .cf-dot { border-radius:50%; }
+.bday-confetti .cf-sq  { border-radius:2px; }
+.bday-confetti .cf-tri { background:transparent !important; width:0 !important; height:0 !important;
+    border-left: 6px solid transparent; border-right: 6px solid transparent;
+    border-bottom: 10px solid currentColor; }
+.bday-confetti .cf-star{ background:transparent !important;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+.bday-confetti .cf-star::before { content:""; position:absolute; inset:0; background:currentColor;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+@keyframes cfDrift {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50%     { transform: translateY(-14px) rotate(160deg); }
+}
+
+.bday-sparkles { position:absolute; inset:0; pointer-events:none; z-index: 4; overflow:hidden; }
+.bday-sparkles .sp-star { position:absolute; border-radius:50%; opacity:0.9;
+    animation: sparkleTwinkle 3s ease-in-out infinite; }
+@keyframes sparkleTwinkle {
+    0%,100% { transform: scale(0.6); opacity: 0.25; }
+    50%     { transform: scale(1.2); opacity: 1; }
+}
+
+/* Keep decorations under primary content but above section base */
+.section > .letter-wrapper,
+.section > .arrival-content,
+.section > .compass-wrapper,
+.section > .container,
+.section > .celebration-btn-container,
+.section > .flower-stage,
+.section > .welcome-hero,
+.section > .finale-content,
+.section > .cake-celebration,
+#panther-section > svg,
+#age-section > * { position: relative; z-index: 8; }
+.corner-balloons { z-index: 9 !important; }
+
+/* Section-specific: soften decorations that would clash with letter paper */
+#letter-section .bday-streamers .streamer { opacity: 0.55; }
+#letter-section .bday-confetti .cf { opacity: 0.6; }
+
+
+#age-section {
+    background:
+        radial-gradient(ellipse 60% 40% at 50% 105%, rgba(201, 169, 110, 0.22), transparent 70%),
+        radial-gradient(ellipse 55% 40% at 50% -5%, rgba(168, 85, 247, 0.16), transparent 70%),
+        radial-gradient(ellipse at center, #0e0a18 0%, #060410 60%, #020108 100%);
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding: 10vh 1.5rem 14vh;
+    text-align: center;
+}
+#age-section .age-stars {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+        radial-gradient(1.2px 1.2px at 12% 22%, rgba(240,223,184,0.7), transparent 60%),
+        radial-gradient(1px 1px at 28% 68%, rgba(216,180,254,0.6), transparent 60%),
+        radial-gradient(1.4px 1.4px at 48% 18%, rgba(255,255,255,0.55), transparent 60%),
+        radial-gradient(1px 1px at 62% 82%, rgba(216,180,254,0.5), transparent 60%),
+        radial-gradient(1.2px 1.2px at 78% 32%, rgba(240,223,184,0.7), transparent 60%),
+        radial-gradient(1px 1px at 88% 64%, rgba(255,255,255,0.5), transparent 60%),
+        radial-gradient(1px 1px at 38% 88%, rgba(216,180,254,0.5), transparent 60%),
+        radial-gradient(1px 1px at 92% 14%, rgba(240,223,184,0.6), transparent 60%);
+    animation: holoDrift 14s ease-in-out infinite;
+}
+#age-section > * { position: relative; z-index: 3; }
+.age-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.85;
+}
+.age-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    background: linear-gradient(120deg, #f0dfb8 0%, #e9d5ff 55%, #f7c6d8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.01em;
+    margin: 0.4rem 0 0.2rem;
+}
+.age-sub {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    max-width: 460px;
+    margin: 0 auto 1.5rem;
+    opacity: 0.85;
+}
+.age-input-row {
+    display: flex; gap: 0.75rem;
+    justify-content: center; align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+.age-input {
+    background: rgba(20, 14, 30, 0.7);
+    border: 1px solid rgba(201, 169, 110, 0.35);
+    color: var(--gold-pale);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1.2rem;
+    width: 180px;
+    text-align: center;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.age-input:focus {
+    border-color: rgba(232, 200, 138, 0.7);
+    box-shadow: 0 0 24px rgba(201, 169, 110, 0.25);
+}
+.age-input::placeholder { color: rgba(184, 181, 174, 0.45); }
+.age-btn {
+    background: linear-gradient(135deg, rgba(201,169,110,0.15), rgba(168,85,247,0.15));
+    border: 1px solid rgba(216, 180, 254, 0.4);
+    color: var(--gold-pale);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.35s ease;
+}
+.age-btn:hover {
+    background: linear-gradient(135deg, rgba(201,169,110,0.3), rgba(168,85,247,0.3));
+    box-shadow: 0 0 30px rgba(201, 169, 110, 0.25);
+    transform: translateY(-1px);
+}
+
+.age-counter-wrap {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin: 0.5rem auto 1.5rem;
+    min-height: 160px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.age-counter-wrap.revealed { opacity: 1; transform: translateY(0); }
+.age-count {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(5rem, 14vw, 9rem);
+    line-height: 1;
+    background: linear-gradient(180deg, #f7d7b8 0%, #d8a8f0 55%, #a3c9ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 24px rgba(216, 180, 254, 0.3));
+    letter-spacing: -0.02em;
+}
+.age-count-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: var(--gold-light);
+    letter-spacing: 0.03em;
+}
+
+.age-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    max-width: 780px;
+    width: 100%;
+    margin: 1rem auto 0;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+}
+.age-stats.revealed { opacity: 1; transform: translateY(0); }
+.age-stat {
+    background: linear-gradient(160deg, rgba(28, 22, 42, 0.75), rgba(14, 10, 24, 0.6));
+    border: 1px solid rgba(216, 180, 254, 0.16);
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    backdrop-filter: blur(6px);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.age-stat:hover {
+    transform: translateY(-3px);
+    border-color: rgba(232, 200, 138, 0.35);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 24px rgba(201, 169, 110, 0.12);
+}
+.age-stat-val {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.7rem;
+    background: linear-gradient(120deg, #f0dfb8, #d8b4fe);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.01em;
+}
+.age-stat-label {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.5;
+}
+
     </style>
 </head>
 <body class="welcome-gate scroll-locked">
@@ -2859,6 +3174,28 @@
         </div>
         <h2 class="panther-title">VIBRANIUM POWERED</h2>
         <p class="panther-sub">Strength. Honor. Brilliance. <em>You embody the spirit of the Panther.</em></p>
+    </section>
+
+    <!-- ═══════════ AGE SECTION (added) ═══════════ -->
+    <section class="section" id="age-section">
+        <div class="age-stars"></div>
+        <p class="age-eyebrow">A little math of you</p>
+        <h2 class="age-title">How many candles this year?</h2>
+        <p class="age-sub">Enter the age you're stepping into — let the universe count with you.</p>
+        <div class="age-input-row">
+            <input class="age-input" id="age-input" type="number" min="1" max="120" placeholder="your age" inputmode="numeric" />
+            <button class="age-btn" id="age-go">Count it</button>
+        </div>
+        <div class="age-counter-wrap" id="age-counter-wrap">
+            <span class="age-count" id="age-count">0</span>
+            <span class="age-count-label" id="age-count-label">years of being a whole vibe</span>
+        </div>
+        <div class="age-stats" id="age-stats">
+            <div class="age-stat"><div class="age-stat-val" data-target="0" id="stat-days">0</div><div class="age-stat-label">days you've been causing beautiful chaos</div></div>
+            <div class="age-stat"><div class="age-stat-val" data-target="0" id="stat-hours">0</div><div class="age-stat-label">hours of your story so far</div></div>
+            <div class="age-stat"><div class="age-stat-val" data-target="0" id="stat-sunsets">0</div><div class="age-stat-label">sunsets you've witnessed</div></div>
+            <div class="age-stat"><div class="age-stat-val" data-target="0" id="stat-beats">0</div><div class="age-stat-label">heartbeats so far</div></div>
+        </div>
     </section>
 
     <!-- ═══════════ SECTION 4: DOGS ═══════════ -->
@@ -3794,7 +4131,7 @@
                     cy = cy || window.innerHeight / 2;
                     
                     // Cinematic burst — richer, layered particles
-                    for (let i = 0; i < 70; i++) {
+                    for (let i = 0; i < 26; i++) {
                         const angle = Math.random() * Math.PI * 2;
                         const speed = Math.random() * 11 + 3;
                         this.tParticles.push(new TransitionParticle('golden', cx, cy, {
@@ -3805,7 +4142,7 @@
                         }));
                     }
                     
-                    for (let i = 0; i < 32; i++) {
+                    for (let i = 0; i < 12; i++) {
                         const angle = Math.random() * Math.PI * 2;
                         const speed = Math.random() * 6 + 2;
                         this.tParticles.push(new TransitionParticle('petal', cx, cy, {
@@ -3817,7 +4154,7 @@
                         }));
                     }
                     
-                    for (let i = 0; i < 16; i++) {
+                    for (let i = 0; i < 6; i++) {
                         const angle = Math.random() * Math.PI * 2;
                         const speed = Math.random() * 5 + 1;
                         this.tParticles.push(new TransitionParticle('light', cx, cy, {
@@ -3994,12 +4331,25 @@
 
             
 
-            // ═══ BIRTHDAY DECORATIONS: corner balloons on every section except welcome ═══
+            // ═══ BIRTHDAY DECORATIONS: balloons + streamers + confetti dots + sparkles per section ═══
             (function decorateSections(){
                 const palette = ['c-gold','c-purple','c-teal','c-rose'];
+                // per-section accent color trios for confetti/sparkle
+                const accentMap = {
+                    'letter-section':   ['#c9a96e','#e0c78a','#fff2c9'],
+                    'panther-section':  ['#67e8f9','#a855f7','#c9a96e'],
+                    'age-section':      ['#ff6b9d','#c084fc','#fbbf24'],
+                    'dogs-section':     ['#fbbf24','#b76e79','#e0c78a'],
+                    'robotics-section': ['#67e8f9','#a855f7','#e0c78a'],
+                    'finale-section':   ['#ff6b9d','#c9a96e','#a855f7'],
+                    'arrival-section':  ['#c9a96e','#e0c78a','#ffffff']
+                };
                 document.querySelectorAll('section.section').forEach((sec, idx) => {
                     if (sec.id === 'welcome-section') return;
                     if (getComputedStyle(sec).position === 'static') sec.style.position = 'relative';
+                    const accents = accentMap[sec.id] || ['#c9a96e','#a855f7','#67e8f9'];
+
+                    // Corner balloons (existing look, always top-anchored)
                     const wrap = document.createElement('div');
                     wrap.className = 'corner-balloons';
                     const cL = palette[idx % palette.length];
@@ -4012,8 +4362,60 @@
                             <div class="cb-body"></div><div class="cb-knot"></div><div class="cb-string"></div>
                         </div>`;
                     sec.appendChild(wrap);
+
+                    // Streamer ribbons in top corners
+                    const streamers = document.createElement('div');
+                    streamers.className = 'bday-streamers';
+                    streamers.innerHTML = `
+                        <svg class="streamer streamer-l" viewBox="0 0 120 260" preserveAspectRatio="none" aria-hidden="true">
+                          <path d="M6 0 C 40 60, -10 130, 30 200 S 60 250, 40 260" fill="none" stroke="${accents[0]}" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+                          <path d="M22 0 C 60 70, 10 150, 60 210 S 80 258, 70 260" fill="none" stroke="${accents[1]}" stroke-width="2.4" stroke-linecap="round" opacity="0.6"/>
+                        </svg>
+                        <svg class="streamer streamer-r" viewBox="0 0 120 260" preserveAspectRatio="none" aria-hidden="true">
+                          <path d="M114 0 C 80 60, 130 130, 90 200 S 60 250, 80 260" fill="none" stroke="${accents[2]}" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+                          <path d="M98 0 C 60 70, 110 150, 60 210 S 40 258, 50 260" fill="none" stroke="${accents[0]}" stroke-width="2.4" stroke-linecap="round" opacity="0.6"/>
+                        </svg>`;
+                    sec.appendChild(streamers);
+
+                    // Confetti dots (floating, distributed along the sides)
+                    const confetti = document.createElement('div');
+                    confetti.className = 'bday-confetti';
+                    let cHTML = '';
+                    const shapes = ['dot','sq','tri','star'];
+                    for (let i = 0; i < 14; i++) {
+                        const side = i % 2 === 0 ? 'left' : 'right';
+                        const top = 8 + Math.random() * 84; // %
+                        const off = 2 + Math.random() * 10; // %
+                        const sz  = 6 + Math.random() * 8;
+                        const rot = Math.random() * 360;
+                        const dur = 5 + Math.random() * 5;
+                        const del = -Math.random() * 6;
+                        const color = accents[i % accents.length];
+                        const shape = shapes[i % shapes.length];
+                        cHTML += `<span class="cf cf-${shape}" style="${side}:${off}%;top:${top}%;width:${sz}px;height:${sz}px;background:${color};color:${color};transform:rotate(${rot}deg);animation-duration:${dur}s;animation-delay:${del}s;"></span>`;
+                    }
+                    confetti.innerHTML = cHTML;
+                    sec.appendChild(confetti);
+
+                    // Sparkles
+                    const sp = document.createElement('div');
+                    sp.className = 'bday-sparkles';
+                    let sHTML = '';
+                    for (let i = 0; i < 10; i++) {
+                        const top  = 10 + Math.random() * 80;
+                        const left = 6 + Math.random() * 88;
+                        const dur  = 2.4 + Math.random() * 2.6;
+                        const del  = -Math.random() * 4;
+                        const sz   = 2 + Math.random() * 3;
+                        const color = accents[i % accents.length];
+                        sHTML += `<span class="sp-star" style="left:${left}%;top:${top}%;width:${sz}px;height:${sz}px;background:${color};box-shadow:0 0 8px ${color},0 0 14px ${color};animation-duration:${dur}s;animation-delay:${del}s;"></span>`;
+                    }
+                    sp.innerHTML = sHTML;
+                    sec.appendChild(sp);
                 });
             })();
+
+
 
             // ═══ FIREWORKS + CONFETTI ENGINE ═══
             const fwCanvas = document.getElementById('fireworks-canvas');
@@ -4160,6 +4562,70 @@
                     });
                 });
             })();
+
+
+            // ═══ AGE COUNTER (added) ═══
+            (function ageCounter(){
+                const input = document.getElementById('age-input');
+                const btn = document.getElementById('age-go');
+                const wrap = document.getElementById('age-counter-wrap');
+                const countEl = document.getElementById('age-count');
+                const labelEl = document.getElementById('age-count-label');
+                const statsWrap = document.getElementById('age-stats');
+                if (!input || !btn) return;
+
+                function formatNum(n){ return Math.round(n).toLocaleString('en-US'); }
+
+                function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+
+                function animateNumber(el, from, to, duration, formatter){
+                    const start = performance.now();
+                    formatter = formatter || formatNum;
+                    function step(now){
+                        const p = Math.min((now - start) / duration, 1);
+                        const eased = easeOutCubic(p);
+                        el.textContent = formatter(from + (to - from) * eased);
+                        if (p < 1) requestAnimationFrame(step);
+                        else el.textContent = formatter(to);
+                    }
+                    requestAnimationFrame(step);
+                }
+
+                function run(){
+                    const age = parseInt(input.value, 10);
+                    if (!age || age < 1 || age > 120) {
+                        input.focus();
+                        input.style.borderColor = 'rgba(220, 120, 120, 0.8)';
+                        setTimeout(() => { input.style.borderColor = ''; }, 900);
+                        return;
+                    }
+                    wrap.classList.add('revealed');
+                    statsWrap.classList.add('revealed');
+
+                    // Big number: 0 → age (slower for drama)
+                    animateNumber(countEl, 0, age, 1800);
+                    labelEl.textContent = age === 1
+                        ? 'year of being a whole vibe'
+                        : 'years of being a whole vibe';
+
+                    // Stat values
+                    const days    = age * 365;
+                    const hours   = age * 365 * 24;
+                    const sunsets = age * 365;
+                    const beats   = age * 365 * 24 * 60 * 72; // ~72 bpm avg
+
+                    animateNumber(document.getElementById('stat-days'),    0, days,    2000);
+                    animateNumber(document.getElementById('stat-hours'),   0, hours,   2200);
+                    animateNumber(document.getElementById('stat-sunsets'), 0, sunsets, 2000);
+                    animateNumber(document.getElementById('stat-beats'),   0, beats,   2600);
+                }
+
+                btn.addEventListener('click', run);
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') run();
+                });
+            })();
+
 
             console.log('%c🌷 Welcome to Mahi\'s Birthday Experience %c✦',
                 'font-size:1.4em;color:#c9a96e;', 'font-size:1em;color:#a855f7;');
