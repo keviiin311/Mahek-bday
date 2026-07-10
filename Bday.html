@@ -12,7 +12,7 @@
             --gold: #c9a96e;
             --gold-light: #e0c78a;
             --gold-pale: #f0dfb8;
-            --purple-panther: #8a2be2;
+            --celestial-gold: #f0dfb8;
             --purple-glow: #a855f7;
             --purple-deep: #3b0f6e;
             --ocean-teal: #0d7377;
@@ -1194,113 +1194,108 @@
             letter-spacing: 0.2em;
         }
 
-        /* ─── SECTION 3: BLACK PANTHER (WAKANDAN TECHNOLOGY) ─── */
-        #panther-section {
+        /* ─── SECTION 3: CELESTIAL BIRTHDAY ─── */
+        #celestial-section {
             background:
-                radial-gradient(ellipse 60% 45% at 50% 105%, rgba(168,85,247,0.28), transparent 65%),
-                radial-gradient(ellipse at center, #140b24 0%, #080312 60%, #020106 100%);
+                radial-gradient(ellipse 70% 55% at 50% 110%, rgba(201,169,110,0.18), transparent 60%),
+                radial-gradient(ellipse 55% 40% at 50% 50%, rgba(100,200,255,0.08), transparent 65%),
+                radial-gradient(ellipse at center, #0a1025 0%, #050815 55%, #020308 100%);
             flex-direction: column;
             gap: 2rem;
             position: relative;
             overflow: hidden;
             isolation: isolate;
         }
-        /* Vibranium energy flow beneath background */
-        .panther-vibranium-flow {
+        /* Star field */
+        .celestial-stars {
             position: absolute;
-            inset: -15%;
+            inset: 0;
+            background-image:
+                radial-gradient(1.4px 1.4px at 12% 18%, rgba(255,255,255,0.95), transparent 80%),
+                radial-gradient(1px 1px at 22% 32%, rgba(255,255,255,0.75), transparent 80%),
+                radial-gradient(1.6px 1.6px at 35% 12%, rgba(240,223,184,0.9), transparent 80%),
+                radial-gradient(1.1px 1.1px at 48% 26%, rgba(255,255,255,0.8), transparent 80%),
+                radial-gradient(1.3px 1.3px at 62% 15%, rgba(255,255,255,0.9), transparent 80%),
+                radial-gradient(1px 1px at 75% 30%, rgba(240,223,184,0.7), transparent 80%),
+                radial-gradient(1.5px 1.5px at 88% 14%, rgba(255,255,255,0.85), transparent 80%),
+                radial-gradient(1.2px 1.2px at 8% 45%, rgba(255,255,255,0.8), transparent 80%),
+                radial-gradient(1px 1px at 18% 58%, rgba(255,255,255,0.7), transparent 80%),
+                radial-gradient(1.4px 1.4px at 30% 48%, rgba(240,223,184,0.85), transparent 80%),
+                radial-gradient(1.1px 1.1px at 55% 52%, rgba(255,255,255,0.75), transparent 80%),
+                radial-gradient(1.3px 1.3px at 70% 48%, rgba(255,255,255,0.9), transparent 80%),
+                radial-gradient(1px 1px at 85% 56%, rgba(240,223,184,0.75), transparent 80%),
+                radial-gradient(1.2px 1.2px at 95% 42%, rgba(255,255,255,0.8), transparent 80%),
+                radial-gradient(1.5px 1.5px at 42% 68%, rgba(255,255,255,0.85), transparent 80%),
+                radial-gradient(1px 1px at 58% 74%, rgba(240,223,184,0.7), transparent 80%),
+                radial-gradient(1.3px 1.3px at 78% 68%, rgba(255,255,255,0.9), transparent 80%),
+                radial-gradient(1.1px 1.1px at 15% 78%, rgba(255,255,255,0.75), transparent 80%),
+                radial-gradient(1.4px 1.4px at 28% 86%, rgba(240,223,184,0.8), transparent 80%),
+                radial-gradient(1.2px 1.2px at 90% 80%, rgba(255,255,255,0.85), transparent 80%);
+            animation: starTwinkle 5s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes starTwinkle {
+            0%,100% { opacity: 0.75; }
+            50%     { opacity: 1; }
+        }
+        /* Soft nebula glow */
+        .celestial-nebula {
+            position: absolute;
+            inset: -20%;
             background:
-                radial-gradient(ellipse 45% 30% at 30% 40%, rgba(168,85,247,0.18), transparent 60%),
-                radial-gradient(ellipse 40% 25% at 70% 60%, rgba(192,132,252,0.14), transparent 65%),
-                radial-gradient(ellipse 30% 20% at 50% 80%, rgba(139,92,246,0.16), transparent 70%);
-            filter: blur(30px);
-            animation: vibraniumFlow 18s ease-in-out infinite;
+                radial-gradient(ellipse 40% 30% at 35% 40%, rgba(100,200,255,0.12), transparent 60%),
+                radial-gradient(ellipse 35% 25% at 70% 55%, rgba(168,85,247,0.10), transparent 65%),
+                radial-gradient(ellipse 25% 20% at 50% 75%, rgba(201,169,110,0.10), transparent 70%);
+            filter: blur(40px);
+            animation: nebulaDrift 20s ease-in-out infinite;
             pointer-events: none;
             z-index: 0;
         }
-        @keyframes vibraniumFlow {
-            0%,100% { transform: translate(0,0) scale(1); opacity: 0.85; }
-            50%     { transform: translate(3%, -2%) scale(1.05); opacity: 1; }
+        @keyframes nebulaDrift {
+            0%,100% { transform: translate(0,0) scale(1); opacity: 0.8; }
+            50%     { transform: translate(2%, -1%) scale(1.06); opacity: 1; }
         }
-        /* Thin geometric Wakandan patterns */
-        .panther-pattern {
+        /* Shooting star */
+        .celestial-shooting-star {
             position: absolute;
-            inset: 0;
-            opacity: 0.14;
-            background-image:
-                repeating-linear-gradient(60deg, rgba(216,180,254,0.18) 0 1px, transparent 1px 44px),
-                repeating-linear-gradient(-60deg, rgba(216,180,254,0.18) 0 1px, transparent 1px 44px),
-                repeating-linear-gradient(0deg, rgba(168,85,247,0.10) 0 1px, transparent 1px 44px);
-            mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
-            pointer-events: none;
-            z-index: 1;
-        }
-        /* Floating hexagonal fragments */
-        .panther-hex {
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            border: 1px solid rgba(216,180,254,0.35);
-            background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(216,180,254,0.02));
-            clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
-            backdrop-filter: blur(2px);
-            animation: hexFloat 14s ease-in-out infinite;
+            top: 18%;
+            left: -10%;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), rgba(240,223,184,0.8), transparent);
+            transform: rotate(-35deg);
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+            opacity: 0;
+            animation: shootAcross 7s ease-out infinite;
+            animation-delay: 2s;
             pointer-events: none;
             z-index: 2;
         }
-        .panther-hex:nth-child(1) { top: 18%; left: 12%; animation-delay: 0s; }
-        .panther-hex:nth-child(2) { top: 62%; left: 8%;  animation-delay: -3s; width: 16px; height: 16px; opacity: 0.7; }
-        .panther-hex:nth-child(3) { top: 24%; right: 14%; animation-delay: -6s; width: 28px; height: 28px; }
-        .panther-hex:nth-child(4) { top: 70%; right: 10%; animation-delay: -9s; width: 14px; height: 14px; opacity: 0.6; }
-        .panther-hex:nth-child(5) { top: 42%; left: 6%;  animation-delay: -4.5s; width: 12px; height: 12px; opacity: 0.5; }
-        .panther-hex:nth-child(6) { top: 48%; right: 6%; animation-delay: -7.5s; width: 18px; height: 18px; }
-        @keyframes hexFloat {
-            0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.55; }
-            50%     { transform: translateY(-14px) rotate(30deg); opacity: 0.9; }
-        }
-        /* Holographic particles */
-        .panther-particles {
+        .celestial-shooting-star::after {
+            content: '';
             position: absolute;
-            inset: 0;
-            background-image:
-                radial-gradient(1.2px 1.2px at 15% 30%, rgba(216,180,254,0.9), transparent 60%),
-                radial-gradient(1px 1px at 28% 68%, rgba(192,132,252,0.7), transparent 60%),
-                radial-gradient(1.4px 1.4px at 45% 22%, rgba(233,213,255,0.8), transparent 60%),
-                radial-gradient(1px 1px at 58% 78%, rgba(216,180,254,0.7), transparent 60%),
-                radial-gradient(1.2px 1.2px at 72% 34%, rgba(192,132,252,0.85), transparent 60%),
-                radial-gradient(1px 1px at 85% 62%, rgba(233,213,255,0.7), transparent 60%),
-                radial-gradient(1px 1px at 38% 88%, rgba(216,180,254,0.6), transparent 60%),
-                radial-gradient(1px 1px at 92% 18%, rgba(192,132,252,0.7), transparent 60%);
-            animation: holoDrift 12s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 2;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 0 12px 4px rgba(255,255,255,0.6);
         }
-        @keyframes holoDrift {
-            0%,100% { opacity: 0.75; transform: translateY(0); }
-            50%     { opacity: 1;    transform: translateY(-6px); }
+        @keyframes shootAcross {
+            0%   { left: -10%; opacity: 0; }
+            10%  { opacity: 1; }
+            70%  { left: 110%; opacity: 1; }
+            100% { left: 120%; opacity: 0; }
         }
-        /* Cinematic light from below */
-        .panther-underlight {
-            position: absolute;
-            left: 0; right: 0; bottom: -20%;
-            height: 60%;
-            background: radial-gradient(ellipse 55% 100% at 50% 100%, rgba(168,85,247,0.35), transparent 70%);
-            filter: blur(20px);
-            animation: underlightPulse 6s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 1;
-        }
-        @keyframes underlightPulse {
-            0%,100% { opacity: 0.7; }
-            50%     { opacity: 1;   }
-        }
-        #panther-section > * {
+        #celestial-section > * {
             position: relative;
             z-index: 4;
         }
-        /* Container + energy rings */
-        .panther-container {
+        /* Moon + orbit container */
+        .celestial-container {
             position: relative;
             width: 300px;
             height: 300px;
@@ -1308,99 +1303,127 @@
             align-items: center;
             justify-content: center;
         }
-        .panther-energy-ring {
+        .celestial-orbit {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid rgba(216,180,254,0.35);
+            border: 1px dashed rgba(201,169,110,0.22);
             pointer-events: none;
         }
-        .panther-energy-ring.r1 {
+        .celestial-orbit.o1 {
             width: 100%; height: 100%;
-            border-style: dashed;
-            box-shadow: 0 0 40px rgba(168,85,247,0.25), inset 0 0 30px rgba(168,85,247,0.18);
-            animation: ringSpin 22s linear infinite;
+            animation: orbitSpin 24s linear infinite;
         }
-        .panther-energy-ring.r2 {
-            width: 118%; height: 118%;
-            border-color: rgba(192,132,252,0.22);
-            animation: ringSpin 34s linear infinite reverse;
+        .celestial-orbit.o2 {
+            width: 128%; height: 128%;
+            border-color: rgba(100,200,255,0.18);
+            animation: orbitSpin 38s linear infinite reverse;
         }
-        .panther-energy-ring.r3 {
-            width: 138%; height: 138%;
-            border-color: rgba(216,180,254,0.14);
+        .celestial-orbit.o3 {
+            width: 152%; height: 152%;
+            border-color: rgba(216,180,254,0.12);
             border-style: dotted;
-            animation: ringSpin 50s linear infinite;
+            animation: orbitSpin 55s linear infinite;
         }
-        @keyframes ringSpin { to { transform: rotate(360deg); } }
-        .panther-glow-ring {
+        @keyframes orbitSpin { to { transform: rotate(360deg); } }
+        .celestial-glow {
             position: absolute;
-            width: 80%;
-            height: 80%;
+            width: 78%;
+            height: 78%;
             border-radius: 50%;
-            background: radial-gradient(circle at 50% 50%, rgba(168,85,247,0.18), transparent 70%);
-            box-shadow: 0 0 60px rgba(168,85,247,0.35), inset 0 0 40px rgba(168,85,247,0.2);
-            animation: pantherPulse 5s ease-in-out infinite;
+            background: radial-gradient(circle at 50% 50%, rgba(201,169,110,0.16), transparent 70%);
+            box-shadow: 0 0 60px rgba(201,169,110,0.28), inset 0 0 40px rgba(201,169,110,0.12);
+            animation: moonGlow 6s ease-in-out infinite;
         }
-        /* Glass depth disc behind mask */
-        .panther-glass {
-            position: absolute;
-            width: 72%; height: 72%;
-            border-radius: 50%;
-            background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(168,85,247,0.05) 60%, transparent);
-            border: 1px solid rgba(216,180,254,0.18);
-            backdrop-filter: blur(6px);
-            box-shadow: inset 0 2px 20px rgba(255,255,255,0.05), inset 0 -6px 30px rgba(0,0,0,0.4);
+        @keyframes moonGlow {
+            0%,100% { transform: scale(1); opacity: 0.75; }
+            50%     { transform: scale(1.06); opacity: 1; }
         }
-        .panther-svg {
-            width: 190px;
-            height: 190px;
-            filter: drop-shadow(0 0 18px rgba(168,85,247,0.55));
-            transition: all 0.5s ease;
+        /* Crescent moon */
+        .celestial-moon {
             position: relative;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #f0dfb8 0%, #e0c78a 55%, #c9a96e 100%);
+            box-shadow:
+                inset -18px -18px 36px rgba(0,0,0,0.35),
+                0 0 50px rgba(201,169,110,0.35),
+                0 0 100px rgba(201,169,110,0.18);
+            overflow: hidden;
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+        }
+        .celestial-moon::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #050815;
+            top: -28px;
+            right: -42px;
+            box-shadow: 0 0 25px rgba(5,8,21,0.9);
+        }
+        .celestial-container:hover .celestial-moon {
+            transform: scale(1.05) rotate(-3deg);
+            box-shadow:
+                inset -18px -18px 36px rgba(0,0,0,0.35),
+                0 0 70px rgba(201,169,110,0.5),
+                0 0 140px rgba(201,169,110,0.25);
+        }
+        /* Moon craters */
+        .celestial-crater {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.12);
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .celestial-crater.c1 { width: 18px; height: 18px; top: 35%; left: 22%; }
+        .celestial-crater.c2 { width: 10px; height: 10px; top: 52%; left: 35%; }
+        .celestial-crater.c3 { width: 14px; height: 14px; top: 28%; left: 44%; }
+        /* Sparkle on moon */
+        .celestial-moon-sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            top: 30%;
+            left: 28%;
             z-index: 2;
+            box-shadow: 0 0 12px 4px rgba(255,255,255,0.6);
+            animation: sparklePulse 2.5s ease-in-out infinite;
         }
-        .panther-container:hover .panther-svg {
-            transform: scale(1.06);
-            filter: drop-shadow(0 0 30px rgba(168,85,247,0.85));
+        @keyframes sparklePulse {
+            0%,100% { opacity: 0.6; transform: scale(0.8); }
+            50%     { opacity: 1;   transform: scale(1.2); }
         }
-        @keyframes pantherPulse {
-            0%,100% { transform: scale(1);    opacity: 0.7; }
-            50%     { transform: scale(1.05); opacity: 1;   }
-        }
-        /* Glowing eyes */
-        .panther-eye-glow {
-            animation: eyeGlow 3.5s ease-in-out infinite;
-            transform-origin: center;
-        }
-        @keyframes eyeGlow {
-            0%,100% { filter: drop-shadow(0 0 3px rgba(240,223,184,0.9)); opacity: 0.95; }
-            50%     { filter: drop-shadow(0 0 10px rgba(240,223,184,1))   drop-shadow(0 0 18px rgba(216,180,254,0.7)); opacity: 1; }
-        }
-        .panther-title {
+        .celestial-title {
             font-family: 'Playfair Display', serif;
             font-size: 2.6rem;
             font-weight: 700;
-            letter-spacing: 0.18em;
-            color: #e9d5ff;
-            text-shadow: 0 0 30px rgba(168,85,247,0.55), 0 0 70px rgba(168,85,247,0.25);
+            letter-spacing: 0.14em;
+            color: #f0dfb8;
+            text-shadow: 0 0 30px rgba(201,169,110,0.45), 0 0 70px rgba(201,169,110,0.2);
             text-align: center;
         }
-        .panther-sub {
+        .celestial-sub {
             font-size: 1.1rem;
-            color: #e9d5ff;
-            letter-spacing: 0.22em;
+            color: #e8e6e1;
+            letter-spacing: 0.18em;
             text-align: center;
-            max-width: 500px;
-            line-height: 1.6;
+            max-width: 520px;
+            line-height: 1.7;
+            opacity: 0.88;
+        }
+        .celestial-eyebrow {
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.55em;
+            font-size: 0.78rem;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            margin-bottom: 1.1rem;
             opacity: 0.85;
-        }
-        .pulse-line {
-            stroke-dasharray: 100;
-            animation: glowSurge 3s ease-in-out infinite alternate;
-        }
-        @keyframes glowSurge {
-            0%   { stroke-dashoffset: 100; opacity: 0.4; }
-            100% { stroke-dashoffset: 0;   opacity: 1;   }
         }
 
         /* ─── SECTION 4: DOGS (Warm sunset ambience) ─── */
@@ -1717,7 +1740,7 @@
             .letter-content h2 {
                 font-size: 1.6rem;
             }
-            .panther-title {
+            .celestial-title {
                 font-size: 1.8rem;
             }
             .compass-container {
@@ -1755,7 +1778,7 @@
             .letter-content h2 {
                 font-size: 1.3rem;
             }
-            .panther-title {
+            .celestial-title {
                 font-size: 1.4rem;
             }
             .compass-container {
@@ -2429,17 +2452,16 @@
 
 /* ═══════════ PATCH 2026-07-10 ═══════════ */
 
-/* ─── Panther: push visual up, drop balloons below ─── */
-/* Panther: balloons stay at top like every other section; panther visual pushed down below them */
-#panther-section {
+/* ─── Celestial: center visual, keep balloons at top ─── */
+#celestial-section {
     justify-content: center;
     padding-top: 40px;
     padding-bottom: 10vh;
 }
-#panther-section .corner-balloons .cb { top: 18px; }
+#celestial-section .corner-balloons .cb { top: 18px; }
 @media (max-width: 700px) {
-    #panther-section { padding-top: 32px; padding-bottom: 8vh; }
-    #panther-section .corner-balloons .cb { top: 12px; }
+    #celestial-section { padding-top: 32px; padding-bottom: 8vh; }
+    #celestial-section .corner-balloons .cb { top: 12px; }
 }
 
 /* ─── Letter: bigger paper so text fits, translate higher ─── */
@@ -2553,8 +2575,8 @@
 .section:not(#welcome-section) > .container,
 .section:not(#welcome-section) > .finale-content,
 .section:not(#welcome-section) > .cake-celebration,
-#panther-section > svg,
-#age-section > * { position: relative; z-index: 8; }
+        #celestial-section > *,
+        #age-section > * { position: relative; z-index: 8; }
 .corner-balloons { z-index: 9 !important; }
 
 /* Section-specific: soften decorations that would clash with letter paper */
@@ -2752,7 +2774,7 @@
         <div class="curtain-title">
             <div class="kicker">✦ Fin ✦</div>
             <div class="title">The End</div>
-            <div class="sub">With all my love — always</div>
+            <div class="sub">Enjoy your special day, superstar ✦</div>
             <div class="flourish">❦</div>
         </div>
     </div>
@@ -3036,12 +3058,12 @@
                                 <h2 class="type-line">A Letter for You</h2>
                                 <p class="greeting type-line">Dear Mahi,</p>
                                 <div class="body-text">
-                                    <p class="type-line">On this day, the world was gifted with someone extraordinary —</p>
-                                    <p class="type-line">an engineer who builds wonders, a soul who loves deeply,</p>
-                                    <p class="type-line">and a heart that finds magic in compasses, vibranium, and wagging tails.</p>
-                                    <p class="type-line" style="margin-top: 1.4rem;">Today, we celebrate <em>you</em>.</p>
+                                    <p class="type-line">Another trip around the sun — and honestly, the sun's lucky to have you orbiting it.</p>
+                                    <p class="type-line">You're the friend who shows up, who laughs the loudest, who makes ordinary Tuesdays feel like little festivals.</p>
+                                    <p class="type-line">So here's to more inside jokes, more chaotic plans, more wins, and a whole year of ridiculously good days.</p>
+                                    <p class="type-line" style="margin-top: 1.4rem;">Go be brilliant, weirdo. The world's better with you loud in it. <em>Happy Birthday, Mahi.</em></p>
                                 </div>
-                                <p class="signature type-line">With love & admiration</p>
+                                <p class="signature type-line">— your friend, always cheering</p>
                             </div>
                         </div>
                     </div>
@@ -3104,69 +3126,28 @@
     <!-- Compass section removed per request -->
 
 
-    <!-- ═══════════ SECTION 3: BLACK PANTHER (Wakandan Technology) ═══════════ -->
-    <section class="section" id="panther-section">
-        <div class="panther-vibranium-flow"></div>
-        <div class="panther-pattern"></div>
-        <div class="panther-particles"></div>
-        <div class="panther-underlight"></div>
-        <div class="panther-hex"></div>
-        <div class="panther-hex"></div>
-        <div class="panther-hex"></div>
-        <div class="panther-hex"></div>
-        <div class="panther-hex"></div>
-        <div class="panther-hex"></div>
+    <!-- ═══════════ SECTION 3: CELESTIAL BIRTHDAY ═══════════ -->
+    <section class="section" id="celestial-section">
+        <div class="celestial-nebula"></div>
+        <div class="celestial-stars"></div>
+        <div class="celestial-shooting-star"></div>
 
-        <div class="panther-container">
-            <div class="panther-energy-ring r3"></div>
-            <div class="panther-energy-ring r2"></div>
-            <div class="panther-energy-ring r1"></div>
-            <div class="panther-glow-ring"></div>
-            <div class="panther-glass"></div>
-            <svg class="panther-svg" viewBox="0 0 100 100">
-                <defs>
-                    <filter id="vibranium-glow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="2.5" result="blur" />
-                        <feMerge>
-                            <feMergeNode in="blur" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
-                    <linearGradient id="mask-body" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#18102a" />
-                        <stop offset="50%" stop-color="#0c0715" />
-                        <stop offset="100%" stop-color="#050208" />
-                    </linearGradient>
-                </defs>
-                <!-- Group 1: Outer silhouette glow -->
-                <g filter="url(#vibranium-glow)">
-                    <path d="M 30,12 L 35,28 L 50,24 L 65,28 L 70,12 L 75,32 L 78,48 L 74,68 L 50,88 L 26,68 L 22,48 L 25,32 Z" 
-                          fill="url(#mask-body)" stroke="#a855f7" stroke-width="1.5" />
-                </g>
-                <!-- Main Mask face -->
-                <path d="M 30,12 L 35,28 L 50,24 L 65,28 L 70,12 L 75,32 L 78,48 L 74,68 L 50,88 L 26,68 L 22,48 L 25,32 Z" 
-                      fill="#0b0713" stroke="#251a3a" stroke-width="2" />
-                <!-- Group 2: Glowing markings & eyes -->
-                <g filter="url(#vibranium-glow)">
-                    <path d="M 50,24 L 50,40" stroke="#c084fc" stroke-width="1.5" stroke-linecap="round" fill="none" class="pulse-line" />
-                    <path d="M 44,27 Q 50,32 56,27" stroke="#c084fc" stroke-width="1.2" stroke-linecap="round" fill="none" class="pulse-line" />
-                    <path d="M 38,30 Q 50,38 62,30" stroke="#c084fc" stroke-width="1.2" stroke-linecap="round" fill="none" class="pulse-line" />
-                    <!-- Glowing Eyes -->
-                    <polygon points="34,44 45,43 42,48 33,48" fill="#f0dfb8" class="panther-eye-glow" />
-                    <polygon points="66,44 55,43 58,48 67,48" fill="#f0dfb8" class="panther-eye-glow" />
-                    <path d="M 46,48 L 47,56 L 50,58 L 53,56 L 54,48" stroke="#a855f7" stroke-width="1" stroke-linecap="round" fill="none" />
-                    <path d="M 30,52 Q 38,58 46,55" stroke="#a855f7" stroke-width="1.5" stroke-linecap="round" fill="none" class="pulse-line" />
-                    <path d="M 70,52 Q 62,58 54,55" stroke="#a855f7" stroke-width="1.5" stroke-linecap="round" fill="none" class="pulse-line" />
-                    <path d="M 42,66 L 50,72 L 58,66" stroke="#a855f7" stroke-width="1" stroke-linecap="round" fill="none" />
-                    <path d="M 36,68 Q 50,78 64,68" stroke="#a855f7" stroke-width="1.2" stroke-linecap="round" fill="none" class="pulse-line" />
-                    <path d="M 50,72 L 50,84" stroke="#a855f7" stroke-width="1" stroke-linecap="round" fill="none" />
-                </g>
-                <path d="M 27,39 Q 37,37 45,42" stroke="#d8b4fe" stroke-width="1" stroke-linecap="round" fill="none" />
-                <path d="M 73,39 Q 63,37 55,42" stroke="#d8b4fe" stroke-width="1" stroke-linecap="round" fill="none" />
-            </svg>
+        <div class="celestial-container">
+            <div class="celestial-orbit o3"></div>
+            <div class="celestial-orbit o2"></div>
+            <div class="celestial-orbit o1"></div>
+            <div class="celestial-glow"></div>
+            <div class="celestial-moon">
+                <div class="celestial-crater c1"></div>
+                <div class="celestial-crater c2"></div>
+                <div class="celestial-crater c3"></div>
+                <div class="celestial-moon-sparkle"></div>
+            </div>
         </div>
-        <h2 class="panther-title">VIBRANIUM POWERED</h2>
-        <p class="panther-sub">Strength. Honor. Brilliance. <em>You embody the spirit of the Panther.</em></p>
+        <p class="celestial-eyebrow">✦  The  Universe  Celebrates  ✦</p>
+        <h2 class="celestial-title">A STAR WAS BORN TODAY</h2>
+        <p class="celestial-sub">The night sky keeps a quiet diary of every soul. On your birthday, the stars align to remind the world that someone extraordinary arrived — and that light like yours only grows brighter with time.</p>
+        <p class="celestial-sub" style="margin-top:1.2rem;font-size:1rem;opacity:0.85;">Shine on, Mahi. The universe is lucky to have you. 🌙✨</p>
     </section>
 
     <!-- ═══════════ AGE SECTION (added) ═══════════ -->
@@ -3312,7 +3293,7 @@
         </div>
         <h1 class="finale-name">Happy Birthday, Mahi</h1>
         <p class="finale-msg">
-            May your day be filled with the strength of the Black Panther, the adventure of the high seas, the warmth of every loyal heart, and the brilliance of everything you build.
+            Here's to another year of success, health and happiness… Happy Bday!! May Lord Krishna always shower happiness, love, prosperity and peace on you and your family. ❤️✨
         </p>
         <p class="finale-hearts">♡ ♡ ♡</p>
         <p style="font-size:0.8rem;color:var(--text-muted);letter-spacing:0.15em;margin-top:1rem;">A day to remember. Forever.</p>
@@ -3385,7 +3366,7 @@
 
             // Add hover effect for interactive elements
             const interactiveEls = document.querySelectorAll(
-                '.envelope, .dog-sil, .compass-container, .panther-container, .scroll-hint, .letter-content, .scroll-indicator-container');
+                '.envelope, .dog-sil, .compass-container, .celestial-container, .scroll-hint, .letter-content, .scroll-indicator-container');
             interactiveEls.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursorDot.classList.add('hovering');
@@ -4331,7 +4312,7 @@
                 // per-section accent color trios for confetti/sparkle
                 const accentMap = {
                     'letter-section':   ['#c9a96e','#e0c78a','#fff2c9'],
-                    'panther-section':  ['#67e8f9','#a855f7','#c9a96e'],
+                    'celestial-section':['#f0dfb8','#64c8ff','#c9a96e'],
                     'age-section':      ['#ff6b9d','#c084fc','#fbbf24'],
                     'dogs-section':     ['#fbbf24','#b76e79','#e0c78a'],
                     'robotics-section': ['#67e8f9','#a855f7','#e0c78a'],
