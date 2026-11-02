@@ -630,7 +630,7 @@
             bottom: 18px;
             z-index: 2;
             opacity: 0;
-            transform: translateY(14px) scale(0.965) rotate(0deg);
+            transform: translate(-50%, 14px) scale(0.965) rotate(0deg);
             transition:
                 transform 1.9s cubic-bezier(0.22, 1, 0.36, 1),
                 opacity 1.3s ease;
@@ -2740,32 +2740,45 @@
     #celestial-section .corner-balloons .cb { top: 12px; }
 }
 
-/* ─── Letter: bigger paper so text fits, translate higher ─── */
-.paper-shadow-wrapper { height: 520px; }
+/* ─── Letter: give the longer keepsake message room to breathe ─── */
+#letter-section.letter-open {
+    overflow: visible;
+    min-height: max(100vh, 1000px);
+}
+.paper-shadow-wrapper {
+    width: min(560px, calc(100vw - 36px));
+    height: 780px;
+    left: 50%;
+}
 .envelope.opened .paper-shadow-wrapper {
-    transform: translateY(-190px) rotate(-2deg);
+    transform: translate(-50%, 80px) rotate(-2deg);
     animation: paperSettleFloatLg 8s ease-in-out infinite alternate 2.8s;
 }
 @keyframes paperSettleFloatLg {
-    0%   { transform: translateY(-190px) rotate(-2deg); }
-    100% { transform: translateY(-193px) rotate(-1.6deg); }
+    0%   { transform: translate(-50%, 80px) rotate(-2deg); }
+    100% { transform: translate(-50%, 77px) rotate(-1.6deg); }
 }
 #letter-section { padding: 34vh 0 4vh; }
 .letter-content .body-text { font-size: 1.06rem; line-height: 1.78; }
-.letter-content .body-text .type-line { margin-bottom: 0.6rem; }
+.letter-content .body-text .type-line { margin-bottom: 1rem; }
 .letter-paper { padding: 2.4rem 2.4rem 2.2rem; }
 
 @media (max-width: 600px) {
-    .paper-shadow-wrapper { height: 420px; }
+    #letter-section.letter-open { min-height: calc(100vh + 730px); }
+    .paper-shadow-wrapper {
+        width: calc(100vw - 56px);
+        height: 1000px;
+    }
     .envelope.opened .paper-shadow-wrapper {
-        transform: translateY(-190px) rotate(-2deg);
+        transform: translate(-50%, 480px) rotate(-2deg);
         animation: paperSettleFloatMobileLg 8s ease-in-out infinite alternate 2.8s;
     }
     @keyframes paperSettleFloatMobileLg {
-        0%   { transform: translateY(-190px) rotate(-2deg); }
-        100% { transform: translateY(-192px) rotate(-1.6deg); }
+        0%   { transform: translate(-50%, 480px) rotate(-2deg); }
+        100% { transform: translate(-50%, 478px) rotate(-1.6deg); }
     }
     #letter-section { padding: 26vh 0 3vh; }
+    .letter-paper { padding: 1.8rem 1.35rem 1.5rem; }
 }
 
 /* ─── Soften the "Begin The Celebration" transition ─── */
@@ -3353,12 +3366,12 @@
                                 <h2 class="type-line">A Letter for You</h2>
                                 <p class="greeting type-line">Dear Mahek,</p>
                                 <div class="body-text">
-                                    <p class="type-line">Another trip around the sun — and honestly, the sun's lucky to have you orbiting it.</p>
-                                    <p class="type-line">You're the friend who shows up, who laughs the loudest, who makes ordinary Tuesdays feel like little festivals.</p>
-                                    <p class="type-line">So here's to more inside jokes, more chaotic plans, more wins, and a whole year of ridiculously good days.</p>
-                                    <p class="type-line" style="margin-top: 1.4rem;">Go be brilliant, weirdo. The world's better with you loud in it. <em>Happy Birthday, Mahek.</em></p>
+                                    <p class="type-line">I loved you with all my heart, and a part of me always wished you could love me the same way. But feelings can’t be forced, and I don’t want you to feel guilty for that.</p>
+                                    <p class="type-line">Thank you for the memories, the smiles, and all the little moments I’ll never forget.</p>
+                                    <p class="type-line">I’m not leaving because I stopped loving you, but because I’ve understood that sometimes loving someone means accepting they aren’t meant to be yours.</p>
+                                    <p class="type-line">I wish you happiness, success, and someone who makes your heart feel at home. Maybe someday, thinking of you won’t hurt anymore.</p>
+                                    <p class="type-line">This is my goodbye, not because you meant nothing, but because you meant so much. ❤️‍🩹</p>
                                 </div>
-                                <p class="signature type-line">— your friend, always cheering</p>
                             </div>
                         </div>
                     </div>
@@ -3924,6 +3937,7 @@
             envelope.addEventListener('click', () => {
                 if (!envelopeOpened) {
                     envelope.classList.add('opened');
+                    document.getElementById('letter-section').classList.add('letter-open');
                     envelopeOpened = true;
                     // Burst sparkles on open
                     const rect = envelope.getBoundingClientRect();
@@ -3936,6 +3950,7 @@
                     typewriterTimeout = setTimeout(startTypewriter, 2700);
                 } else {
                     envelope.classList.remove('opened');
+                    document.getElementById('letter-section').classList.remove('letter-open');
                     envelopeOpened = false;
                     isTyping = false;
                     clearTimeout(typewriterTimeout);
@@ -3959,7 +3974,8 @@
                     if (lineIndex < originalContents.length) {
                         const item = originalContents[lineIndex];
                         lineIndex++;
-                        typeHTML(item.el, item.html, 28, typeNextLine);
+                        const speed = item.el.closest('.body-text') ? 14 : 28;
+                        typeHTML(item.el, item.html, speed, typeNextLine);
                     }
                 }
                 typeNextLine();
@@ -3977,7 +3993,7 @@
                 function type() {
                     if (!envelopeOpened || !isTyping) return;
                     if (i < htmlText.length) {
-                        let char = htmlText.charAt(i);
+                        const char = String.fromCodePoint(htmlText.codePointAt(i));
                         if (char === '<') {
                             let tagEnd = htmlText.indexOf('>', i);
                             if (tagEnd !== -1) {
@@ -3989,7 +4005,7 @@
                             }
                         } else {
                             element.insertBefore(document.createTextNode(char), cursor);
-                            i++;
+                            i += char.length;
                         }
                         const naturalSpeed = speed + (Math.random() - 0.5) * 15;
                         setTimeout(type, Math.max(10, naturalSpeed));
