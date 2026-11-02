@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday, Mahek ✦</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #080810;
@@ -2432,47 +2432,247 @@
   .corner-balloons .cb .cb-string{height:26px;}
 }
 
-/* ═══ CAKE CELEBRATION (finale) ═══ */
+/* ═══ CAKE CELEBRATION (finale — pastel 3-tier design) ═══ */
 .cake-celebration{margin-top:3.5rem;display:flex;flex-direction:column;align-items:center;position:relative;z-index:3;}
-.cake-celebration .cake-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.4rem,3vw,2rem);
-  color:var(--gold-light);margin-bottom:0.3rem;letter-spacing:0.02em;}
-.cake-celebration .cake-sub{font-size:0.9rem;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.4rem;}
-#cake-area{position:relative;width:300px;height:260px;perspective:600px;}
-.cake-platform{position:absolute;bottom:0;width:100%;height:220px;transform-style:preserve-3d;
-  transform:rotateX(8deg) rotateY(0deg);transition:transform 0.4s ease;}
-.cake-tier{position:absolute;left:50%;border-radius:14px;
-  box-shadow:inset 0 -15px 30px rgba(0,0,0,0.3),0 8px 30px rgba(0,0,0,0.35);}
-.tier-bottom{bottom:0;width:240px;height:85px;transform:translateX(-50%);
-  background:linear-gradient(180deg,#6d28d9,#4c1d95);}
-.tier-bottom::before{content:"";position:absolute;top:-12px;left:-8px;right:-8px;height:24px;
-  background:linear-gradient(180deg,#fbbf24,#c9a96e);border-radius:12px;box-shadow:0 2px 10px rgba(201,169,110,0.4);}
-.tier-top{bottom:70px;width:170px;height:70px;transform:translateX(-50%);
-  background:linear-gradient(180deg,#a855f7,#7c3aed);}
-.tier-top::before{content:"";position:absolute;top:-10px;left:-6px;right:-6px;height:20px;
-  background:linear-gradient(180deg,#ff6b9d,#b76e79);border-radius:10px;box-shadow:0 2px 10px rgba(183,110,121,0.4);}
-.tier-crown{bottom:126px;width:110px;height:55px;transform:translateX(-50%);
-  background:linear-gradient(180deg,#c084fc,#a855f7);}
-.tier-crown::before{content:"";position:absolute;top:-8px;left:-5px;right:-5px;height:16px;
-  background:linear-gradient(180deg,#e0c78a,#c9a96e);border-radius:8px;box-shadow:0 2px 10px rgba(201,169,110,0.4);}
-.candle-3d{position:absolute;bottom:168px;width:8px;height:40px;
-  background:linear-gradient(180deg,#fbbf24,#d97706);border-radius:3px 3px 1px 1px;cursor:pointer;transition:filter 0.3s;}
-.candle-3d:hover{filter:brightness(1.2);}
-.flame-wrap{position:absolute;top:-22px;left:50%;transform:translateX(-50%);width:14px;height:22px;pointer-events:none;}
-.flame-inner{width:100%;height:100%;
-  background:radial-gradient(ellipse at 50% 70%,#fff8dc 10%,#fbbf24 35%,#ff6b9d 70%,transparent 80%);
-  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
-  animation:flame-dance 0.8s ease-in-out infinite alternate;
-  box-shadow:0 0 15px rgba(251,191,36,0.6),0 0 30px rgba(255,107,157,0.3);transition:opacity 0.4s,transform 0.4s;}
-.candle-3d.blown .flame-inner{opacity:0;transform:scale(0) translateY(-10px);}
-.candle-3d.blown .smoke{opacity:1;}
-.smoke{position:absolute;top:-28px;left:50%;transform:translateX(-50%);width:6px;height:20px;
-  background:linear-gradient(180deg,rgba(200,200,220,0.5),transparent);border-radius:50%;opacity:0;
-  animation:smoke-rise 2s ease-out forwards;pointer-events:none;}
-@keyframes flame-dance{0%{transform:scaleX(1) scaleY(1) rotate(-2deg);}100%{transform:scaleX(.85) scaleY(1.1) rotate(2deg);}}
-@keyframes smoke-rise{0%{opacity:0.5;transform:translateX(-50%) translateY(0) scale(1);}100%{opacity:0;transform:translateX(-50%) translateY(-30px) scale(1.5);}}
-.c3d-1{left:calc(50% - 32px);}
-.c3d-2{left:calc(50% - 4px);}
-.c3d-3{left:calc(50% + 24px);}
+.cake-celebration .cake-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.4rem,3vw,2.1rem);
+  color:var(--gold-light);margin-bottom:0.35rem;letter-spacing:0.02em;text-align:center;}
+.cake-celebration .cake-sub{font-size:0.92rem;color:var(--text-secondary);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.6rem;text-align:center;opacity:0.85;}
+#cake-area{position:relative;width:340px;height:310px;perspective:700px;display:flex;justify-content:center;}
+.cake-platform{position:absolute;bottom:0;width:330px;height:280px;transform-style:preserve-3d;
+  transform:rotateX(6deg) rotateY(0deg);transition:transform 0.4s ease;}
+
+/* Platter / Plate at bottom */
+.cake-plate{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:320px;
+    height:18px;
+    border-radius:50%;
+    background:linear-gradient(180deg, #f5f8ff 0%, #dfe7f7 50%, #c4d3ee 100%);
+    box-shadow:0 12px 28px rgba(0,0,0,0.5), 0 0 24px rgba(180,210,255,0.25);
+    z-index:1;
+}
+
+/* Base Tier Box */
+.cake-tier{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    box-shadow:0 10px 24px rgba(0,0,0,0.3), inset 0 -4px 8px rgba(0,0,0,0.08);
+    overflow:hidden;
+}
+
+/* Tier Frosting SVG */
+.tier-frosting{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:auto;
+    filter:drop-shadow(0 2px 2px rgba(0,0,0,0.06));
+    z-index:2;
+    pointer-events:none;
+}
+
+/* Tier Content (decorations & text) */
+.tier-body{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:3;
+}
+
+/* Bottom Tier (Pastel Rose Pink with cursive "Happy birthday") */
+.tier-bottom{
+    bottom:8px;
+    width:280px;
+    height:76px;
+    border-radius:18px;
+    background:linear-gradient(180deg, #f48ea7 0%, #ea7392 100%);
+    z-index:2;
+}
+.tier-bottom .tier-body{
+    height:46px;
+}
+.cake-text-script{
+    font-family:'Dancing Script', 'Brush Script MT', 'Caveat', cursive;
+    font-size:1.7rem;
+    font-weight:700;
+    font-style:italic;
+    color:#ffffff;
+    letter-spacing:0.02em;
+    text-shadow:0 2px 5px rgba(0,0,0,0.22);
+    user-select:none;
+    transform:translateY(3px);
+}
+
+/* Middle Tier (Pastel Blue with Sparkle + Heart Outline + Sparkle) */
+.tier-middle{
+    bottom:76px;
+    width:216px;
+    height:68px;
+    border-radius:17px;
+    background:linear-gradient(180deg, #8ba8e8 0%, #749be5 100%);
+    z-index:3;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25), inset 0 -3px 6px rgba(0,0,0,0.06);
+}
+.tier-middle .tier-body{
+    height:42px;
+}
+.middle-decor{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    transform:translateY(2px);
+}
+.middle-decor svg{
+    filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* Top Tier (Warm Ivory / Butter Cream with cute Solid Pink Heart) */
+.tier-crown{
+    bottom:136px;
+    width:150px;
+    height:60px;
+    border-radius:16px;
+    background:linear-gradient(180deg, #f8f1df 0%, #f1e4c7 100%);
+    z-index:4;
+    box-shadow:0 8px 18px rgba(0,0,0,0.22), inset 0 -3px 5px rgba(0,0,0,0.05);
+}
+.tier-crown .tier-body{
+    height:38px;
+}
+.top-decor{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform:translateY(2px);
+}
+.top-decor svg{
+    filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+/* Candy-Striped 3D Candles */
+.candle-3d{
+    position:absolute;
+    bottom:194px;
+    background:repeating-linear-gradient(
+        -45deg,
+        #f0829e 0px,
+        #f0829e 5px,
+        #ffffff 5px,
+        #ffffff 10px
+    );
+    border-radius:4px;
+    cursor:pointer;
+    transition:filter 0.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,0.35), inset -2px 0 3px rgba(0,0,0,0.15);
+    z-index:5;
+}
+.candle-3d:hover{
+    filter:brightness(1.15) drop-shadow(0 0 10px rgba(255,200,80,0.7));
+}
+.candle-wick{
+    position:absolute;
+    top:-5px;
+    left:50%;
+    transform:translateX(-50%);
+    width:2px;
+    height:6px;
+    background:#3c3230;
+    border-radius:1px;
+}
+.c3d-1{
+    width:13px;
+    height:48px;
+    left:calc(50% - 46px);
+}
+.c3d-2{
+    width:14px;
+    height:62px;
+    left:calc(50% - 7px);
+}
+.c3d-3{
+    width:13px;
+    height:48px;
+    left:calc(50% + 33px);
+}
+
+/* Luminous Golden Candle Flames */
+.flame-wrap{
+    position:absolute;
+    top:-30px;
+    left:50%;
+    transform:translateX(-50%);
+    width:20px;
+    height:30px;
+    pointer-events:none;
+}
+.flame-glow{
+    position:absolute;
+    inset:-10px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,200,70,0.5) 0%, rgba(255,140,30,0.18) 50%, transparent 75%);
+    animation:flame-glow-pulse 1.2s ease-in-out infinite alternate;
+}
+.flame-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    background:radial-gradient(ellipse at 50% 75%, #ffffff 0%, #fff7a1 28%, #ffb636 60%, #ff5e36 92%);
+    border-radius:50% 50% 35% 35% / 60% 60% 40% 40%;
+    box-shadow:0 0 14px rgba(255,200,60,0.9),
+                0 0 28px rgba(255,130,40,0.5),
+                0 0 45px rgba(255,90,20,0.25);
+    animation:flame-dance 0.9s ease-in-out infinite alternate;
+    transition:opacity 0.4s, transform 0.4s;
+}
+.c3d-1 .flame-inner{animation-delay:-0.3s;}
+.c3d-2 .flame-inner{animation-delay:0s;}
+.c3d-3 .flame-inner{animation-delay:-0.6s;}
+
+@keyframes flame-dance{
+    0%{transform:scaleX(1) scaleY(1) rotate(-2deg);}
+    100%{transform:scaleX(0.88) scaleY(1.08) rotate(2.5deg);}
+}
+@keyframes flame-glow-pulse{
+    0%{opacity:0.75; transform:scale(0.95);}
+    100%{opacity:1; transform:scale(1.1);}
+}
+
+.candle-3d.blown .flame-inner,
+.candle-3d.blown .flame-glow{
+    opacity:0 !important;
+    transform:scale(0) translateY(-10px);
+}
+.candle-3d.blown .smoke{
+    opacity:1;
+}
+.smoke{
+    position:absolute;
+    top:-28px;
+    left:50%;
+    transform:translateX(-50%);
+    width:6px;
+    height:20px;
+    background:linear-gradient(180deg, rgba(220,220,240,0.6), transparent);
+    border-radius:50%;
+    opacity:0;
+    animation:smoke-rise 2s ease-out forwards;
+    pointer-events:none;
+}
+@keyframes smoke-rise{
+    0%{opacity:0.6; transform:translateX(-50%) translateY(0) scale(1);}
+    100%{opacity:0; transform:translateX(-50%) translateY(-35px) scale(1.6);}
+}
+
 .all-blown-msg{margin-top:24px;font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;
   color:var(--gold-light);opacity:0;transform:translateY(10px);transition:opacity 0.6s,transform 0.6s;}
 .all-blown-msg.show{opacity:1;transform:translateY(0);}
@@ -2511,6 +2711,10 @@
     pointer-events:none;
     transform:translateY(8px) scale(0.95);
     transition:opacity 0.5s ease, transform 0.5s ease;
+}
+
+@media (max-width: 480px) {
+    #cake-area { transform: scale(0.88); transform-origin: center bottom; margin-bottom: -15px; }
 }
 
 /* ═══ FLYING BALLOONS on candle finale ═══ */
@@ -3374,16 +3578,69 @@
 
         <!-- ═══ CAKE CELEBRATION ═══ -->
         <div class="cake-celebration">
-            <p class="cake-title">Make a wish — blow out the candles</p>
+            <p class="cake-title">Close your eyes, think of something beautiful, then blow out the candles ✨</p>
             <p class="cake-sub">tap each candle or use the button below</p>
             <div id="cake-area">
                 <div class="cake-platform" id="cake-platform">
-                    <div class="cake-tier tier-bottom"></div>
-                    <div class="cake-tier tier-top"></div>
-                    <div class="cake-tier tier-crown"></div>
-                    <div class="candle-3d c3d-1"><div class="flame-wrap"><div class="flame-inner"></div></div><div class="smoke"></div></div>
-                    <div class="candle-3d c3d-2"><div class="flame-wrap"><div class="flame-inner"></div></div><div class="smoke"></div></div>
-                    <div class="candle-3d c3d-3"><div class="flame-wrap"><div class="flame-inner"></div></div><div class="smoke"></div></div>
+                    <!-- Platter / Plate -->
+                    <div class="cake-plate"></div>
+
+                    <!-- Bottom Tier (Pastel Rose Pink with cursive "Happy birthday") -->
+                    <div class="cake-tier tier-bottom">
+                        <svg class="tier-frosting" viewBox="0 0 280 30" preserveAspectRatio="none">
+                            <path fill="#fffef7" d="M 0,16 Q 0,0 18,0 L 262,0 Q 280,0 280,16 L 280,17 C 273,28 252,28 245,17 C 238,28 217,28 210,17 C 203,28 182,28 175,17 C 168,28 147,28 140,17 C 133,28 112,28 105,17 C 98,28 77,28 70,17 C 63,28 42,28 35,17 C 28,28 7,28 0,17 Z"/>
+                        </svg>
+                        <div class="tier-body">
+                            <span class="cake-text-script">Happy birthday</span>
+                        </div>
+                    </div>
+
+                    <!-- Middle Tier (Pastel Blue with Sparkle + Heart Outline + Sparkle) -->
+                    <div class="cake-tier tier-middle">
+                        <svg class="tier-frosting" viewBox="0 0 216 28" preserveAspectRatio="none">
+                            <path fill="#fffef7" d="M 0,15 Q 0,0 16,0 L 200,0 Q 216,0 216,15 L 216,16 C 209,26 187,26 180,16 C 173,26 151,26 144,16 C 137,26 115,26 108,16 C 101,26 79,26 72,16 C 65,26 43,26 36,16 C 29,26 7,26 0,16 Z"/>
+                        </svg>
+                        <div class="tier-body middle-decor">
+                            <svg viewBox="0 0 24 24" width="22" height="22">
+                                <path fill="#ffffff" d="M12 0 C12 7 17 12 24 12 C17 12 12 17 12 24 C12 17 7 12 0 12 C7 12 12 7 12 0 Z"/>
+                            </svg>
+                            <svg viewBox="0 0 24 24" width="23" height="23">
+                                <path fill="none" stroke="#ffffff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            <svg viewBox="0 0 24 24" width="22" height="22">
+                                <path fill="#ffffff" d="M12 0 C12 7 17 12 24 12 C17 12 12 17 12 24 C12 17 7 12 0 12 C7 12 12 7 12 0 Z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Top Tier (Warm Ivory with Cute Solid Pink Heart) -->
+                    <div class="cake-tier tier-crown">
+                        <svg class="tier-frosting" viewBox="0 0 150 26" preserveAspectRatio="none">
+                            <path fill="#fffef7" d="M 0,14 Q 0,0 14,0 L 136,0 Q 150,0 150,14 L 150,15 C 144,24 126,24 120,15 C 114,24 96,24 90,15 C 84,24 66,24 60,15 C 54,24 36,24 30,15 C 24,24 6,24 0,15 Z"/>
+                        </svg>
+                        <div class="tier-body top-decor">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="#ef7ca0" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- 3 Candy-Striped Candles -->
+                    <div class="candle-3d c3d-1">
+                        <div class="candle-wick"></div>
+                        <div class="flame-wrap"><div class="flame-glow"></div><div class="flame-inner"></div></div>
+                        <div class="smoke"></div>
+                    </div>
+                    <div class="candle-3d c3d-2">
+                        <div class="candle-wick"></div>
+                        <div class="flame-wrap"><div class="flame-glow"></div><div class="flame-inner"></div></div>
+                        <div class="smoke"></div>
+                    </div>
+                    <div class="candle-3d c3d-3">
+                        <div class="candle-wick"></div>
+                        <div class="flame-wrap"><div class="flame-glow"></div><div class="flame-inner"></div></div>
+                        <div class="smoke"></div>
+                    </div>
                 </div>
             </div>
             <button id="blow-all-btn" class="blow-all-btn">🌬️ Blow the Candles</button>
@@ -4584,10 +4841,10 @@
                     const r = area.getBoundingClientRect();
                     const x = (e.clientX-r.left)/r.width - 0.5;
                     const y = (e.clientY-r.top)/r.height - 0.5;
-                    platform.style.transform = `rotateX(${8 - y*12}deg) rotateY(${x*15}deg)`;
+                    platform.style.transform = `rotateX(${4 - y*6}deg) rotateY(${x*8}deg)`;
                 });
                 area.addEventListener('mouseleave', ()=>{
-                    platform.style.transform = 'rotateX(8deg) rotateY(0deg)';
+                    platform.style.transform = 'rotateX(4deg) rotateY(0deg)';
                 });
                 let celebrated = false;
 
