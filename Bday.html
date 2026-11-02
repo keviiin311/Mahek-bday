@@ -7,22 +7,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #080810;
-            --bg-section: #0c0c1a;
-            --gold: #c9a96e;
-            --gold-light: #e0c78a;
-            --gold-pale: #f0dfb8;
-            --celestial-gold: #f0dfb8;
-            --purple-glow: #a855f7;
-            --purple-deep: #3b0f6e;
-            --ocean-teal: #0d7377;
-            --ocean-dark: #062c2e;
-            --rose: #b76e79;
-            --text-primary: #e8e6e1;
-            --text-secondary: #b8b5ae;
-            --text-muted: #7a7670;
-            --surface: #14141f;
-            --border-subtle: #1e1e2e;
+            --bg-deep: #f7f4ee;
+            --bg-section: #fcfaf6;
+            --gold: #b18a68;
+            --gold-light: #c18b72;
+            --gold-pale: #f1e2cf;
+            --celestial-gold: #c7a779;
+            --purple-glow: #d7b6aa;
+            --purple-deep: #766b64;
+            --ocean-teal: #8d9d89;
+            --ocean-dark: #606e61;
+            --rose: #c88d7e;
+            --text-primary: #373530;
+            --text-secondary: #716b63;
+            --text-muted: #928a80;
+            --surface: #fffdfa;
+            --border-subtle: #e7dfd4;
         }
 
         * {
@@ -40,7 +40,7 @@
             font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, 'Times New Roman', serif;
             background: var(--bg-deep);
             color: var(--text-primary);
-            cursor: none;
+            cursor: auto;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.6;
@@ -3036,6 +3036,589 @@
     line-height: 1.5;
 }
 
+/* A quieter, paper-and-ink palette for Mahek's birthday card */
+body {
+    background: #f7f4ee;
+    color: #373530;
+}
+
+.section {
+    padding: clamp(2rem, 6vw, 5rem);
+    color: #373530;
+}
+
+.section:not(#welcome-section):not(#arrival-section)::before,
+.section:not(#welcome-section):not(#arrival-section):not(#finale-section)::after {
+    display: none;
+}
+
+.custom-cursor,
+.cursor-ring,
+.scroll-indicator-container {
+    display: none !important;
+}
+
+#sparkle-canvas {
+    opacity: 0.28;
+}
+
+#welcome-section {
+    min-height: 100svh;
+    padding: 3rem 7vw 7rem;
+    gap: 0;
+    background: #f7f4ee;
+    color: #373530;
+}
+
+#welcome-section::before {
+    display: none;
+}
+
+.welcome-hero {
+    flex: 0 0 58%;
+    padding: 3rem 1rem 3rem 3vw;
+}
+
+.hero-emoji-top {
+    filter: none;
+    color: #b18a68;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    margin-bottom: 1.4rem;
+}
+
+.hero-greeting {
+    color: #8a796b;
+    font-size: 0.82rem;
+    letter-spacing: 0.24em;
+}
+
+.hero-title {
+    font-weight: 500;
+    line-height: 1.06;
+    margin-bottom: 0.8rem;
+}
+
+.hero-title .line-1 {
+    color: #49443e;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    text-shadow: none;
+}
+
+.hero-title .line-2 {
+    background: none;
+    color: #bd806b;
+    -webkit-text-fill-color: currentColor;
+    font-size: clamp(3.6rem, 7vw, 6.4rem);
+    filter: none;
+}
+
+.hero-title .line-3 {
+    color: #777168;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    margin-top: 0.65rem;
+}
+
+.hero-tagline {
+    color: #777168;
+    font-size: 1.12rem;
+    max-width: 390px;
+    margin-bottom: 0;
+}
+
+.hero-tagline .highlight {
+    color: #71836f;
+}
+
+.hero-divider {
+    width: 56px;
+    height: 1px;
+    background: #c7a779;
+}
+
+.flower-stage {
+    flex: 0 0 42%;
+    min-width: 0;
+    max-width: 520px;
+    height: min(88vh, 760px);
+}
+
+.plant-svg {
+    filter: drop-shadow(0 5px 15px rgba(104, 111, 84, 0.12));
+}
+
+.floating-petal {
+    display: none;
+}
+
+.celebration-btn-container {
+    bottom: 5%;
+}
+
+.celebration-btn {
+    padding: 15px 32px;
+    color: #fffdfa;
+    background: #494b43;
+    border: 1px solid #494b43;
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(55, 53, 48, 0.12);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.035em;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.celebration-btn.phase-outline,
+.celebration-btn.phase-glass,
+.celebration-btn.phase-idle {
+    background: #494b43;
+    border-color: #494b43;
+    box-shadow: 0 6px 20px rgba(55, 53, 48, 0.12);
+}
+
+.celebration-btn.phase-idle {
+    animation: btnBreathe 4s ease-in-out infinite;
+}
+
+.celebration-btn.phase-idle:hover {
+    color: #fffdfa;
+    background: #62685b;
+    border-color: #62685b;
+    box-shadow: 0 9px 24px rgba(55, 53, 48, 0.18);
+    transform: translateY(-2px);
+}
+
+.btn-text {
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.btn-ripple {
+    background: radial-gradient(circle, rgba(247, 226, 207, 0.58), transparent 70%);
+}
+
+.transition-overlay {
+    background: radial-gradient(circle at var(--clip-cx, 50%) var(--clip-cy, 50%),
+        #fffaf3 0%, #f6e8dc 38%, #e8d8c8 100%) !important;
+    transition: clip-path 1.05s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.55s ease !important;
+}
+
+.transition-flash,
+.transition-ring {
+    display: none;
+}
+
+#transition-canvas {
+    opacity: 0;
+}
+
+#arrival-section {
+    background: #fcfaf6;
+    color: #373530;
+    gap: 1.2rem;
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#arrival-section::before {
+    inset: 5vw;
+    width: auto;
+    height: auto;
+    border: 1px solid #e8dfd4;
+    border-radius: 2px;
+    background: radial-gradient(ellipse at 50% 45%, rgba(231, 205, 187, 0.3), transparent 65%);
+    animation: none;
+}
+
+.arrival-content {
+    gap: 0.9rem;
+}
+
+.arrival-title {
+    background: none;
+    color: #49443e;
+    -webkit-text-fill-color: currentColor;
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    filter: none;
+    transform: translateY(14px);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.arrival-subtitle {
+    color: #777168;
+    font-size: 1.3rem;
+    letter-spacing: 0.015em;
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.arrival-divider {
+    background: #c7a779;
+}
+
+.arrival-scroll-hint {
+    color: #8b8379;
+    letter-spacing: 0.08em;
+    animation: none !important;
+}
+
+#letter-section {
+    background: #e9e1d5;
+}
+
+.desk-background {
+    background: #e9e1d5;
+    background-image:
+        radial-gradient(ellipse at 18% 20%, rgba(255, 255, 255, 0.65), transparent 48%),
+        linear-gradient(135deg, #eee8dd, #e4dbce);
+    filter: none;
+    transform: none;
+}
+
+.desk-vignette,
+.desk-light-overlay {
+    display: none;
+}
+
+.envelope {
+    filter: drop-shadow(0 14px 22px rgba(76, 63, 50, 0.18));
+}
+
+.envelope-back,
+.envelope-front {
+    background: linear-gradient(145deg, #fbf5eb, #eee1d1) !important;
+    border-color: rgba(159, 126, 100, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 8px 18px rgba(76, 63, 50, 0.1);
+}
+
+.envelope-flap {
+    background: linear-gradient(180deg, #ead7c5, #dfc7b1) !important;
+    border-color: rgba(159, 126, 100, 0.3);
+}
+
+.letter-paper {
+    background: #fffdf8;
+    border-color: #e4d7c8;
+    box-shadow: 0 15px 36px rgba(72, 59, 47, 0.14);
+    color: #49443e;
+}
+
+.letter-content,
+.letter-content .body-text,
+.letter-content .greeting,
+.letter-content .signature {
+    color: #514a43;
+}
+
+#celestial-section,
+#age-section {
+    background: #f5f0e8;
+    color: #373530;
+}
+
+.celestial-stars,
+.celestial-nebula,
+.celestial-shooting-star,
+#age-section .age-stars {
+    display: none;
+}
+
+.celestial-title,
+.age-title {
+    background: none;
+    color: #49443e;
+    -webkit-text-fill-color: currentColor;
+    text-shadow: none;
+    filter: none;
+}
+
+.celestial-sub,
+.age-sub {
+    color: #716b63;
+    letter-spacing: 0.02em;
+}
+
+.celestial-eyebrow,
+.age-eyebrow {
+    color: #a17b60;
+}
+
+.celestial-moon {
+    background: linear-gradient(145deg, #f0dfc2, #c59c6d);
+    box-shadow: 0 12px 30px rgba(151, 117, 78, 0.16);
+}
+
+.celestial-orbit,
+.celestial-glow {
+    opacity: 0.35;
+}
+
+.age-input {
+    background: #fffdfa;
+    border-color: #d7c8b7;
+    color: #49443e;
+}
+
+.age-input::placeholder {
+    color: #a59a8e;
+}
+
+.age-input:focus {
+    border-color: #b18a68;
+    box-shadow: 0 0 0 3px rgba(177, 138, 104, 0.12);
+}
+
+.age-btn {
+    background: #646d5e;
+    border-color: #646d5e;
+    color: #fffdfa;
+    letter-spacing: 0.08em;
+}
+
+.age-btn:hover {
+    background: #535c4e;
+    box-shadow: 0 5px 14px rgba(66, 75, 62, 0.15);
+}
+
+.age-count,
+.age-stat-val {
+    background: none;
+    color: #87694f;
+    -webkit-text-fill-color: currentColor;
+    filter: none;
+}
+
+.age-count-label {
+    color: #716b63;
+}
+
+.age-stat {
+    background: transparent;
+    border: 0;
+    border-top: 1px solid #ded5c9;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.age-stat:hover {
+    transform: none;
+    border-color: #c7a779;
+    box-shadow: none;
+}
+
+.age-stat-label {
+    color: #80786f;
+    letter-spacing: 0.06em;
+}
+
+#dogs-section {
+    background: #e8ece4;
+    color: #373530;
+}
+
+.dogs-sunset,
+.dogs-bokeh {
+    display: none;
+}
+
+.dogs-paw {
+    filter: none;
+    opacity: 0.36;
+}
+
+.dog-sil svg {
+    stroke: #71836f;
+}
+
+.dog-sil {
+    filter: none;
+}
+
+.dogs-message {
+    color: #51594d;
+    text-shadow: none;
+}
+
+#finale-section {
+    background: #373a35;
+    color: #f8f4ec;
+}
+
+.finale-name {
+    background: none;
+    color: #f4e8d7;
+    -webkit-text-fill-color: currentColor;
+    filter: none;
+}
+
+.finale-msg,
+.cake-title {
+    color: #e7ddd0;
+    text-shadow: none;
+}
+
+.finale-sparkle-ring {
+    border-color: rgba(226, 199, 165, 0.38);
+    box-shadow: 0 0 32px rgba(226, 199, 165, 0.12);
+}
+
+.cake-tier.tier-bottom {
+    background: linear-gradient(180deg, #d99a91, #c9827a);
+}
+
+.cake-tier.tier-middle {
+    background: linear-gradient(180deg, #a5b29a, #88977f);
+}
+
+.candle-3d {
+    background: repeating-linear-gradient(-45deg, #d99a91 0 5px, #fffaf2 5px 10px);
+    box-shadow: 0 3px 8px rgba(41, 38, 34, 0.18);
+}
+
+.blow-all-btn {
+    background: #f7f1e8;
+    border-color: #e8d5be;
+    color: #51483f;
+    box-shadow: 0 5px 16px rgba(20, 20, 18, 0.12);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.blow-all-btn:hover {
+    background: #fffaf3;
+    border-color: #c7a779;
+    color: #51483f;
+    box-shadow: 0 7px 18px rgba(20, 20, 18, 0.18);
+}
+
+.all-blown-msg {
+    color: #f0d7b4;
+}
+
+.bday-streamers,
+.corner-balloons {
+    display: none;
+}
+
+.bday-confetti .cf,
+.bday-sparkles .sp-star {
+    opacity: 0.35;
+}
+
+.stage-curtains .curtain-valance,
+.stage-curtains .curtain-panel {
+    background: linear-gradient(135deg, #756e62, #a9947d 50%, #776e62);
+}
+
+.stage-curtains .curtain-title,
+.stage-curtains .curtain-title .sub {
+    color: #fffaf3;
+    text-shadow: 0 2px 12px rgba(46, 41, 35, 0.3);
+}
+
+@media (max-width: 1024px) {
+    #welcome-section {
+        padding: 2rem 5vw 6rem;
+        flex-direction: row;
+    }
+
+    .welcome-hero {
+        flex-basis: 56%;
+        padding: 2rem 0.75rem;
+    }
+
+    .flower-stage {
+        flex-basis: 44%;
+        min-width: 0;
+        height: min(78vh, 650px);
+    }
+}
+
+@media (max-width: 700px) {
+    #welcome-section {
+        min-height: 100svh;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 5vh 1.5rem 6rem;
+    }
+
+    .welcome-hero {
+        flex: none;
+        width: 100%;
+        padding: 2rem 0 0;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-title .line-1 {
+        font-size: clamp(1.85rem, 8vw, 2.5rem);
+    }
+
+    .hero-title .line-2 {
+        font-size: clamp(3.2rem, 14vw, 4.8rem);
+    }
+
+    .hero-title .line-3 {
+        font-size: 1.05rem;
+    }
+
+    .hero-divider {
+        margin: 0.85rem auto;
+    }
+
+    .hero-tagline {
+        max-width: 320px;
+        font-size: 1rem;
+    }
+
+    .flower-stage {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: none;
+        height: 31svh;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    .celebration-btn-container {
+        bottom: 4%;
+    }
+
+    .celebration-btn {
+        padding: 13px 25px;
+        font-size: 1rem;
+    }
+
+    #arrival-section::before {
+        inset: 1rem;
+    }
+
+    .section {
+        padding: 4rem 1.4rem;
+    }
+
+    #letter-section {
+        padding: 26vh 0 3vh;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flower-plant,
+    .bloom-glow,
+    .bloom-glow-outer,
+    .celebration-btn.phase-idle,
+    .letter-wrapper,
+    .finale-sparkle-ring,
+    .finale-inner {
+        animation: none !important;
+    }
+}
+
     </style>
 </head>
 <body class="welcome-gate scroll-locked">
@@ -3089,16 +3672,16 @@
 
         <!-- ★ LEFT SIDE: Welcome Hero Text -->
         <div class="welcome-hero">
-            <div class="hero-emoji-top">🎂 🎉 ✨</div>
-            <p class="hero-greeting">— A Special Day Awaits —</p>
+            <div class="hero-emoji-top">✦ FROM THE HEART ✦</div>
+            <p class="hero-greeting">— A LITTLE SOMETHING JUST FOR YOU —</p>
             <h1 class="hero-title">
-                <span class="line line-1">Welcome,</span>
-                <span class="line line-2">Birthday Girl! 🎀</span>
-                <span class="line line-3">to your digital celebration 💫</span>
+                <span class="line line-1">Happy Birthday,</span>
+                <span class="line line-2">Mahek</span>
+                <span class="line line-3">a little celebration, made just for you</span>
             </h1>
             <div class="hero-divider"></div>
             <p class="hero-tagline">
-                Sit back, scroll slowly, and let the <span class="highlight">celebration begin</span>. 🥂
+                Today is all about you. Take your time and enjoy every little moment.
             </p>
             <p class="hero-scroll-cta">↡ Scroll gently to explore ↡</p>
         </div>
@@ -3123,42 +3706,42 @@
                     </feMerge>
                 </filter>
                 <linearGradient id="stemGrad" x1="0" y1="1" x2="0" y2="0">
-                    <stop offset="0%" stop-color="#0a4a40"/>
-                    <stop offset="30%" stop-color="#15806a"/>
-                    <stop offset="60%" stop-color="#20b89a"/>
-                    <stop offset="100%" stop-color="#40e0c0"/>
+                    <stop offset="0%" stop-color="#586a5b"/>
+                    <stop offset="30%" stop-color="#758b73"/>
+                    <stop offset="60%" stop-color="#9bad91"/>
+                    <stop offset="100%" stop-color="#c1c9a9"/>
                 </linearGradient>
                 <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#18a085"/>
-                    <stop offset="50%" stop-color="#30c8a8"/>
-                    <stop offset="100%" stop-color="#50e8d0"/>
+                    <stop offset="0%" stop-color="#7c9078"/>
+                    <stop offset="50%" stop-color="#a8b296"/>
+                    <stop offset="100%" stop-color="#d0c9a7"/>
                 </linearGradient>
                 <radialGradient id="bloomGrad" cx="50%" cy="40%">
-                    <stop offset="0%" stop-color="#ffffff"/>
-                    <stop offset="30%" stop-color="#f0fffc"/>
-                    <stop offset="55%" stop-color="#c0fff0"/>
-                    <stop offset="80%" stop-color="#80eed8"/>
-                    <stop offset="100%" stop-color="#50c8b0"/>
+                    <stop offset="0%" stop-color="#fffaf4"/>
+                    <stop offset="30%" stop-color="#f8e9df"/>
+                    <stop offset="55%" stop-color="#efcfc0"/>
+                    <stop offset="80%" stop-color="#dfb5a2"/>
+                    <stop offset="100%" stop-color="#c99683"/>
                 </radialGradient>
                 <radialGradient id="bloomGradInner" cx="50%" cy="45%">
-                    <stop offset="0%" stop-color="#ffffff"/>
-                    <stop offset="40%" stop-color="#eafffa"/>
-                    <stop offset="100%" stop-color="#90ffe0"/>
+                    <stop offset="0%" stop-color="#fffaf4"/>
+                    <stop offset="40%" stop-color="#f8e9df"/>
+                    <stop offset="100%" stop-color="#e6c1af"/>
                 </radialGradient>
                 <radialGradient id="bloomCenter" cx="50%" cy="50%">
-                    <stop offset="0%" stop-color="#fffff0"/>
-                    <stop offset="40%" stop-color="#ffee88"/>
-                    <stop offset="80%" stop-color="#eedd44"/>
-                    <stop offset="100%" stop-color="#ccbb30"/>
+                    <stop offset="0%" stop-color="#fff6dc"/>
+                    <stop offset="40%" stop-color="#ead3a0"/>
+                    <stop offset="80%" stop-color="#d2b579"/>
+                    <stop offset="100%" stop-color="#b99a62"/>
                 </radialGradient>
                 <radialGradient id="bloomGlow" cx="50%" cy="50%">
-                    <stop offset="0%" stop-color="rgba(180,255,240,0.6)"/>
-                    <stop offset="50%" stop-color="rgba(140,255,230,0.25)"/>
-                    <stop offset="100%" stop-color="rgba(100,255,220,0)"/>
+                    <stop offset="0%" stop-color="rgba(231,195,173,0.32)"/>
+                    <stop offset="50%" stop-color="rgba(226,202,181,0.16)"/>
+                    <stop offset="100%" stop-color="rgba(226,202,181,0)"/>
                 </radialGradient>
                 <radialGradient id="bloomGlowOuter" cx="50%" cy="50%">
-                    <stop offset="0%" stop-color="rgba(100,255,220,0.15)"/>
-                    <stop offset="100%" stop-color="rgba(100,255,220,0)"/>
+                    <stop offset="0%" stop-color="rgba(226,202,181,0.12)"/>
+                    <stop offset="100%" stop-color="rgba(226,202,181,0)"/>
                 </radialGradient>
             </defs>
         </svg>
@@ -3297,8 +3880,8 @@
     <!-- ═══════════ ARRIVAL SECTION ═══════════ -->
     <section class="section" id="arrival-section">
         <div class="arrival-content">
-            <h1 class="arrival-title">Happy Birthday 🌸</h1>
-            <p class="arrival-subtitle">A few little moments,<br>made only for you.</p>
+            <h1 class="arrival-title">Happy Birthday, Mahek</h1>
+            <p class="arrival-subtitle">A few little moments,<br>made with love, just for you.</p>
             <div class="arrival-divider"></div>
             <p class="arrival-scroll-hint">↓<br>Scroll slowly…</p>
         </div>
@@ -4181,7 +4764,7 @@
                     if (!this.canvas || !this.btn) return;
                     this.ctx = this.canvas.getContext('2d');
                     this.updateCanvasSize();
-                    const totalDelay = 6500;
+                    const totalDelay = 4500;
                     setTimeout(() => this.startMaterialization(), totalDelay);
                 }
                 updateCanvasSize() {
@@ -4206,10 +4789,10 @@
                         }, i * 20);
                     }
                     this.animate();
-                    setTimeout(() => { this.btn.classList.add('phase-outline'); }, 800);
-                    setTimeout(() => { this.btn.classList.add('phase-glass'); }, 1400);
-                    setTimeout(() => { this.btn.classList.add('phase-border'); }, 2000);
-                    setTimeout(() => { this.btn.classList.add('phase-text'); }, 2600);
+                    setTimeout(() => { this.btn.classList.add('phase-outline'); }, 500);
+                    setTimeout(() => { this.btn.classList.add('phase-glass'); }, 850);
+                    setTimeout(() => { this.btn.classList.add('phase-border'); }, 1200);
+                    setTimeout(() => { this.btn.classList.add('phase-text'); }, 1550);
                     setTimeout(() => {
                         this.btn.classList.add('phase-idle');
                         this.container.classList.add('materialized');
@@ -4217,7 +4800,7 @@
                         // Remove will-change since transition is complete
                         this.btn.style.willChange = '';
                         this.setupEventListeners();
-                    }, 3200);
+                    }, 2050);
                 }
                 startLoop() {
                     if (!this.running && this.ctx && this.phase !== 'waiting' && this.phase !== 'clicked') {
@@ -4263,12 +4846,12 @@
                         const clickX = e.clientX || (rect.left + rect.width / 2);
                         const clickY = e.clientY || (rect.top + rect.height / 2);
                         spawnSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2, 15);
-                        setTimeout(() => { this.btn.classList.add('disappearing'); }, 200);
+                        setTimeout(() => { this.btn.classList.add('disappearing'); }, 100);
                         setTimeout(() => {
                             this.destroy();
                             const transition = new TransitionController();
                             transition.start(clickX, clickY);
-                        }, 600);
+                        }, 450);
                     });
                 }
                 destroy() {
@@ -4394,8 +4977,8 @@
                     this.phase1();
                     this.phase2(clickX, clickY);
                     
-                    setTimeout(() => this.phaseSwap(), 1500);
-                    setTimeout(() => this.phaseEnd(), 2200);
+                    setTimeout(() => this.phaseSwap(), 1150);
+                    setTimeout(() => this.phaseEnd(), 1850);
                 }
                 lockInteraction() {
                     document.body.classList.add('scroll-locked');
@@ -4428,11 +5011,11 @@
 
                     // Birthday confetti palette — festive but tasteful, matches gold theme
                     const confettiColors = [
-                        'rgba(240, 200, 120,',  // warm gold
-                        'rgba(255, 235, 190,',  // pale champagne
-                        'rgba(230, 130, 155,',  // rose
-                        'rgba(150, 210, 220,',  // soft teal
-                        'rgba(200, 160, 230,'   // orchid
+                        'rgba(193, 139, 114,',
+                        'rgba(232, 210, 184,',
+                        'rgba(202, 151, 135,',
+                        'rgba(153, 169, 145,',
+                        'rgba(177, 138, 104,'
                     ];
                     const pick = () => confettiColors[(Math.random() * confettiColors.length) | 0];
 
@@ -4450,7 +5033,7 @@
                     }
 
                     // Confetti burst — upward fan, gravity pulls it down
-                    for (let i = 0; i < 28; i++) {
+                    for (let i = 0; i < 16; i++) {
                         const angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.1;
                         const speed = Math.random() * 9 + 5;
                         this.tParticles.push(new TransitionParticle('confetti', cx, cy, {
@@ -4463,7 +5046,7 @@
                     }
 
                     // A few slow streamers for elegance
-                    for (let i = 0; i < 5; i++) {
+                    for (let i = 0; i < 2; i++) {
                         const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.4;
                         const speed = Math.random() * 4 + 2;
                         this.tParticles.push(new TransitionParticle('streamer', cx, cy, {
@@ -4524,10 +5107,10 @@
                     const subtitle = document.querySelector('.arrival-subtitle');
                     const divider = document.querySelector('.arrival-divider');
                     const hint = document.querySelector('.arrival-scroll-hint');
-                    setTimeout(() => title && title.classList.add('visible'), 300);
-                    setTimeout(() => subtitle && subtitle.classList.add('visible'), 800);
-                    setTimeout(() => divider && divider.classList.add('visible'), 1200);
-                    setTimeout(() => hint && hint.classList.add('visible'), 1800);
+                    setTimeout(() => title && title.classList.add('visible'), 180);
+                    setTimeout(() => subtitle && subtitle.classList.add('visible'), 460);
+                    setTimeout(() => divider && divider.classList.add('visible'), 700);
+                    setTimeout(() => hint && hint.classList.add('visible'), 980);
                 }
             }
 
