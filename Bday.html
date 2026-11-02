@@ -390,16 +390,16 @@
             fill: url(#bloomGrad);
             opacity: 0;
             transform-origin: var(--petal-origin, 50% 100%);
-            animation: petalOpen 1.2s cubic-bezier(0.25, 0.8, 0.25, 1.1) forwards;
-            animation-delay: var(--petal-delay, 2s);
+            animation: petalOpen 0.9s cubic-bezier(0.25, 0.8, 0.25, 1.1) forwards;
+            animation-delay: calc(var(--petal-delay, 2s) - 0.5s);
             filter: url(#softGlow);
         }
         .bloom-petal-inner {
             fill: url(#bloomGradInner);
             opacity: 0;
             transform-origin: var(--petal-origin, 50% 100%);
-            animation: petalOpen 1.2s cubic-bezier(0.25, 0.8, 0.25, 1.1) forwards;
-            animation-delay: var(--petal-delay, 2s);
+            animation: petalOpen 0.9s cubic-bezier(0.25, 0.8, 0.25, 1.1) forwards;
+            animation-delay: calc(var(--petal-delay, 2s) - 0.5s);
         }
         @keyframes petalOpen {
             0% { opacity: 0; transform: scale(0) rotate(var(--petal-rot, 0deg)); }
@@ -409,8 +409,8 @@
 
         .bloom-center {
             opacity: 0;
-            animation: centerGlow 1s ease forwards;
-            animation-delay: var(--center-delay, 2.8s);
+            animation: centerGlow 0.7s ease forwards;
+            animation-delay: calc(var(--center-delay, 2.8s) - 0.5s);
         }
         @keyframes centerGlow {
             0% { opacity: 0; r: 0; }
@@ -4275,7 +4275,15 @@
                     if (!this.canvas || !this.btn) return;
                     this.ctx = this.canvas.getContext('2d');
                     this.updateCanvasSize();
-                    const totalDelay = 4500;
+                    const blooms = this.container.parentElement.querySelectorAll(
+                        '.bloom-petal, .bloom-petal-inner, .bloom-center'
+                    );
+                    const bloomEnd = Math.max(...Array.from(blooms, (bloom) => {
+                        const styles = getComputedStyle(bloom);
+                        return parseFloat(styles.animationDelay) * 1000 +
+                            parseFloat(styles.animationDuration) * 1000;
+                    }));
+                    const totalDelay = Math.max(0, bloomEnd);
                     setTimeout(() => this.startMaterialization(), totalDelay);
                 }
                 updateCanvasSize() {
@@ -4300,10 +4308,10 @@
                         }, i * 20);
                     }
                     this.animate();
-                    setTimeout(() => { this.btn.classList.add('phase-outline'); }, 250);
-                    setTimeout(() => { this.btn.classList.add('phase-glass'); }, 500);
-                    setTimeout(() => { this.btn.classList.add('phase-border'); }, 750);
-                    setTimeout(() => { this.btn.classList.add('phase-text'); }, 1000);
+                    setTimeout(() => { this.btn.classList.add('phase-outline'); }, 0);
+                    setTimeout(() => { this.btn.classList.add('phase-glass'); }, 150);
+                    setTimeout(() => { this.btn.classList.add('phase-border'); }, 300);
+                    setTimeout(() => { this.btn.classList.add('phase-text'); }, 450);
                     setTimeout(() => {
                         this.btn.classList.add('phase-idle');
                         this.container.classList.add('materialized');
@@ -4311,7 +4319,7 @@
                         // Remove will-change since transition is complete
                         this.btn.style.willChange = '';
                         this.setupEventListeners();
-                    }, 1300);
+                    }, 700);
                 }
                 startLoop() {
                     if (!this.running && this.ctx && this.phase !== 'waiting' && this.phase !== 'clicked') {
