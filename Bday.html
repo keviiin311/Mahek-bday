@@ -3069,9 +3069,67 @@
     opacity: 0;
 }
 
+@media (max-width: 768px) {
+    #welcome-section {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100svh;
+        overflow: visible;
+        padding: 1.5rem 1rem calc(2rem + env(safe-area-inset-bottom));
+    }
+
+    .welcome-hero {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .flower-stage {
+        flex: 0 0 auto;
+        width: 100%;
+        min-width: 0;
+        height: clamp(300px, 42svh, 390px);
+        margin: 0 auto;
+    }
+
+    .celebration-btn-container {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .celebration-btn {
+        max-width: calc(100vw - 2rem);
+        white-space: normal;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    #welcome-section {
+        padding: 1rem 0.75rem calc(1.25rem + env(safe-area-inset-bottom));
+    }
+
+    .welcome-hero {
+        padding: 0.75rem 0.75rem 0.25rem;
+    }
+
+    .hero-emoji-top { margin-bottom: 0.5rem; }
+    .hero-greeting { margin-bottom: 0.45rem; }
+    .hero-title { margin-bottom: 0.6rem; }
+    .hero-divider { margin: 0.5rem auto; }
+    .hero-tagline { margin-bottom: 0.75rem; }
+
+    .flower-stage {
+        height: clamp(260px, 38svh, 340px);
+    }
+}
+
     </style>
 </head>
-<body class="welcome-gate scroll-locked">
+<body class="welcome-gate">
 
     <!-- ═══ CLOSING CURTAINS ═══ -->
     <div class="stage-curtains opening gone" id="stage-curtains-end">
@@ -4217,7 +4275,7 @@
                     if (!this.canvas || !this.btn) return;
                     this.ctx = this.canvas.getContext('2d');
                     this.updateCanvasSize();
-                    const totalDelay = 6500;
+                    const totalDelay = 4500;
                     setTimeout(() => this.startMaterialization(), totalDelay);
                 }
                 updateCanvasSize() {
@@ -4242,10 +4300,10 @@
                         }, i * 20);
                     }
                     this.animate();
-                    setTimeout(() => { this.btn.classList.add('phase-outline'); }, 800);
-                    setTimeout(() => { this.btn.classList.add('phase-glass'); }, 1400);
-                    setTimeout(() => { this.btn.classList.add('phase-border'); }, 2000);
-                    setTimeout(() => { this.btn.classList.add('phase-text'); }, 2600);
+                    setTimeout(() => { this.btn.classList.add('phase-outline'); }, 250);
+                    setTimeout(() => { this.btn.classList.add('phase-glass'); }, 500);
+                    setTimeout(() => { this.btn.classList.add('phase-border'); }, 750);
+                    setTimeout(() => { this.btn.classList.add('phase-text'); }, 1000);
                     setTimeout(() => {
                         this.btn.classList.add('phase-idle');
                         this.container.classList.add('materialized');
@@ -4253,7 +4311,7 @@
                         // Remove will-change since transition is complete
                         this.btn.style.willChange = '';
                         this.setupEventListeners();
-                    }, 3200);
+                    }, 1300);
                 }
                 startLoop() {
                     if (!this.running && this.ctx && this.phase !== 'waiting' && this.phase !== 'clicked') {
