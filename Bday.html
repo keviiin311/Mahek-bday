@@ -2470,13 +2470,48 @@
   animation:smoke-rise 2s ease-out forwards;pointer-events:none;}
 @keyframes flame-dance{0%{transform:scaleX(1) scaleY(1) rotate(-2deg);}100%{transform:scaleX(.85) scaleY(1.1) rotate(2deg);}}
 @keyframes smoke-rise{0%{opacity:0.5;transform:translateX(-50%) translateY(0) scale(1);}100%{opacity:0;transform:translateX(-50%) translateY(-30px) scale(1.5);}}
-.c3d-1{left:calc(50% - 45px);}
-.c3d-2{left:calc(50% - 18px);}
-.c3d-3{left:calc(50% + 10px);}
-.c3d-4{left:calc(50% + 37px);}
+.c3d-1{left:calc(50% - 32px);}
+.c3d-2{left:calc(50% - 4px);}
+.c3d-3{left:calc(50% + 24px);}
 .all-blown-msg{margin-top:24px;font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;
   color:var(--gold-light);opacity:0;transform:translateY(10px);transition:opacity 0.6s,transform 0.6s;}
 .all-blown-msg.show{opacity:1;transform:translateY(0);}
+
+/* Blow All Candles Button */
+.blow-all-btn{
+    margin-top:1.4rem;
+    padding:0.85rem 2.2rem;
+    font-family:'Playfair Display',serif;
+    font-size:1.05rem;
+    font-style:italic;
+    letter-spacing:0.06em;
+    color:var(--gold-light);
+    background:linear-gradient(135deg, rgba(201,169,110,0.12), rgba(168,85,247,0.12));
+    border:1.5px solid rgba(201,169,110,0.4);
+    border-radius:50px;
+    cursor:pointer;
+    transition:all 0.4s ease;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    box-shadow:0 0 20px rgba(201,169,110,0.15);
+}
+.blow-all-btn:hover{
+    background:linear-gradient(135deg, rgba(201,169,110,0.25), rgba(168,85,247,0.25));
+    box-shadow:0 0 35px rgba(201,169,110,0.35);
+    transform:translateY(-3px);
+    border-color:rgba(201,169,110,0.7);
+    color:var(--gold-pale);
+}
+.blow-all-btn:active{
+    transform:translateY(-1px) scale(0.97);
+    transition-duration:0.1s;
+}
+.blow-all-btn.hidden{
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(8px) scale(0.95);
+    transition:opacity 0.5s ease, transform 0.5s ease;
+}
 
 /* ═══ FLYING BALLOONS on candle finale ═══ */
 .fly-balloon{position:fixed;bottom:-140px;z-index:52;pointer-events:none;width:50px;}
@@ -3340,7 +3375,7 @@
         <!-- ═══ CAKE CELEBRATION ═══ -->
         <div class="cake-celebration">
             <p class="cake-title">Make a wish — blow out the candles</p>
-            <p class="cake-sub">tap each candle to blow it out</p>
+            <p class="cake-sub">tap each candle or use the button below</p>
             <div id="cake-area">
                 <div class="cake-platform" id="cake-platform">
                     <div class="cake-tier tier-bottom"></div>
@@ -3349,9 +3384,9 @@
                     <div class="candle-3d c3d-1"><div class="flame-wrap"><div class="flame-inner"></div></div><div class="smoke"></div></div>
                     <div class="candle-3d c3d-2"><div class="flame-wrap"><div class="flame-inner"></div></div><div class="smoke"></div></div>
                     <div class="candle-3d c3d-3"><div class="flame-wrap"><div class="flame-inner"></div></div><div class="smoke"></div></div>
-                    <div class="candle-3d c3d-4"><div class="flame-wrap"><div class="flame-inner"></div></div><div class="smoke"></div></div>
                 </div>
             </div>
+            <button id="blow-all-btn" class="blow-all-btn">🌬️ Blow the Candles</button>
             <p class="all-blown-msg" id="all-blown-msg">your wish has been heard ✨</p>
         </div>
     </section>
@@ -4543,6 +4578,7 @@
                 const area = document.getElementById('cake-area');
                 const candles = document.querySelectorAll('.candle-3d');
                 const msg = document.getElementById('all-blown-msg');
+                const blowAllBtn = document.getElementById('blow-all-btn');
                 if (!platform || !area || !candles.length) return;
                 area.addEventListener('mousemove', (e)=>{
                     const r = area.getBoundingClientRect();
@@ -4554,33 +4590,55 @@
                     platform.style.transform = 'rotateX(8deg) rotateY(0deg)';
                 });
                 let celebrated = false;
+
+                function checkAllBlown(){
+                    const allBlown = [...candles].every(x => x.classList.contains('blown'));
+                    if (allBlown && !celebrated){
+                        celebrated = true;
+                        msg.classList.add('show');
+                        if (blowAllBtn) blowAllBtn.classList.add('hidden');
+                        // Epic fireworks
+                        for (let i=0;i<10;i++){
+                            setTimeout(()=>{
+                                launchFirework(Math.random()*window.innerWidth,
+                                    window.innerHeight*0.15 + Math.random()*window.innerHeight*0.35);
+                                confettiBurst(Math.random()*window.innerWidth,
+                                    window.innerHeight*0.3 + Math.random()*window.innerHeight*0.3, 40);
+                            }, i*320);
+                        }
+                        releaseBalloons();
+                        // 🎵 Start birthday song the moment the last candle goes out
+                        if (window.playBirthdaySong) window.playBirthdaySong();
+                        // After celebration → end curtains close
+                        setTimeout(()=>{ if (window.closeEndCurtains) window.closeEndCurtains(); }, 5200);
+                    }
+                }
+
                 candles.forEach(c => {
                     c.addEventListener('click', ()=>{
                         if (c.classList.contains('blown')) return;
                         c.classList.add('blown');
                         const r = c.getBoundingClientRect();
                         confettiBurst(r.left + r.width/2, r.top, 30);
-                        const allBlown = [...candles].every(x => x.classList.contains('blown'));
-                        if (allBlown && !celebrated){
-                            celebrated = true;
-                            msg.classList.add('show');
-                            // Epic fireworks
-                            for (let i=0;i<10;i++){
-                                setTimeout(()=>{
-                                    launchFirework(Math.random()*window.innerWidth,
-                                        window.innerHeight*0.15 + Math.random()*window.innerHeight*0.35);
-                                    confettiBurst(Math.random()*window.innerWidth,
-                                        window.innerHeight*0.3 + Math.random()*window.innerHeight*0.3, 40);
-                                }, i*320);
-                            }
-                            releaseBalloons();
-                            // 🎵 Start birthday song the moment the last candle goes out
-                            if (window.playBirthdaySong) window.playBirthdaySong();
-                            // After celebration → end curtains close
-                            setTimeout(()=>{ if (window.closeEndCurtains) window.closeEndCurtains(); }, 5200);
-                        }
+                        checkAllBlown();
                     });
                 });
+
+                // Blow All button — blows candles one by one with stagger
+                if (blowAllBtn) {
+                    blowAllBtn.addEventListener('click', ()=>{
+                        const unblown = [...candles].filter(c => !c.classList.contains('blown'));
+                        if (!unblown.length) return;
+                        unblown.forEach((c, i) => {
+                            setTimeout(()=>{
+                                c.classList.add('blown');
+                                const r = c.getBoundingClientRect();
+                                confettiBurst(r.left + r.width/2, r.top, 30);
+                                checkAllBlown();
+                            }, i * 250);
+                        });
+                    });
+                }
             })();
 
 
@@ -4660,7 +4718,7 @@
     </audio>
     <script>
         (function birthdayAudio(){
-            const AUDIO_SRC = 'https://project--10a22a2c-7785-4789-9807-a41a933e8e3d.lovable.app/__l5e/assets-v1/8ae92c6d-968a-408d-9717-35e635c70691/happy-birthday.mp3';
+            const AUDIO_SRC = 'nastelbom-happy-birthday-471481.mp3';
             const audio = document.getElementById('bday-audio');
             const srcEl = document.getElementById('bday-audio-src');
             if (!audio || !srcEl) return;
